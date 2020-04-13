@@ -6,7 +6,7 @@
 name: Cheng Zeng
 
 # Short bio or description (displayed in the header)
-description: Deep Learning is the true magic
+description: Deep learning is the true magic
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
 avatar: https://media-exp1.licdn.com/dms/image/C4E03AQFgO2O_bUbjTw/profile-displayphoto-shrink_200_200/0?e=1592438400&v=beta&t=4eRMQ9uYb7cvdQIDeGlu02XDe9aaTspZ2lxXogF-mE4
@@ -41,7 +41,7 @@ google_analytics:
 
 # Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
-url:
+url: http://cengc13.github.io
 
 # If you're hosting your site at a Project repository on GitHub pages
 # (http://yourusername.github.io/repository-name)
@@ -53,10 +53,12 @@ baseurl: ""
 # !! You don't need to change any of the configuration flags below !!
 #
 
+markdown: kramdown
+highlighter: rouge
 permalink: /:title/
 
 # The release of Jekyll Now that you're using
-version: v1.2.0
+version: v3.8.5
 
 # Jekyll 3 now only supports Kramdown for Markdown
 kramdown:
@@ -84,3 +86,16 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+
+excerpt_separator: "<!--more-->"
+
+prose:
+  metadata:
+    _posts:
+      - name: "title"
+        field:
+          element: "text"
+          label: "title"
+  media: "images"
+
+future: true
