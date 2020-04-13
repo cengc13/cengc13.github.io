@@ -45,6 +45,25 @@ Taking advantage of Kaggle's TPU support, this competition aims to build multili
 Basically it is a classification problem. The model performance is evaluated by the [area under the ROC curve](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) between the predictions and the observations.
 
 The submission file consists of two columns. The first column indicates the comment `id` and the second one is the probability for the `toxicity` variable. Following is an example submission file.
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+}
+th {
+  text-align: left;
+}
+</style>
+</head>
+<body>
+
 <table style="width:100%">
   <tr>
     <th>id</th>
@@ -63,7 +82,8 @@ The submission file consists of two columns. The first column indicates the comm
     <td>0.9</td>
   </tr>
 </table>
-
+</body>
+</html>
 
 ## <a href="#part-2-eda" name="part-2-eda">Part 2: EDA </a>
 
