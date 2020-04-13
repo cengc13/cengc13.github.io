@@ -8,9 +8,9 @@ This project is an ongoing Kaggle Competition. It lives at [toxic comment classi
 
 In this starter blog, I will walk you through the overview of the competition, exploratory data analysis, and  basics of language models for this project. The outline will be as follows.
 
-<div style="font-size:75%; background-color:#eee; border: 1px solid #bbb; display: table; padding: 7px" markdown="1">
+<div style="font-size:75%; background-color:#eee; border: 1px solid #bbb; display: table; padding: 7px" markdown="0">
 
-<div style="text-align:center" markdown="1">  
+<div style="text-align:center" markdown="0">  
 
 **Contents**
 
@@ -20,7 +20,7 @@ In this starter blog, I will walk you through the overview of the competition, e
   * Background & Motivation
   * Description of The Competition
   * Evaluation Metrics and Submission Requirements
-* **[Part 2: EDA](#part-2-eda)**
+* **[Part 2: Data Exploration](#part-2-eda)**
   * Dataset
   * Preprocessing
   * EDA
@@ -91,31 +91,31 @@ In addition to the well defined metrics evaluted on the given testing set. We mi
 
 * Another possible application is to scrape comments from some social media, say "reddit", and predict whether the comment will receive upvote, downvote or be removed.
 
-## <a href="#part-2-eda" name="part-2-eda">Part 2: EDA </a>
+## <a href="#part-2-eda" name="part-2-eda">Part 2: Data Exploration </a>
 
 ### Dataset
 Following is the list of the datasets we have for this project. The primary data is the `comment_text` column which contains the text of comment to be classified as toxic or non-toxic (0...1 in the `toxic` column). The trainingset's comments are mostly written in English whereas the validation and testing sets' comments are composed of multiple non-English languages. A detailed explanation of the dataset can be found on the [competition webpage](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/data)
 
-<div class="verticalcenter" markdown="0">
+<div class="img-div" markdown="0">
   <image src="/images/starter-blog/datasets.png"/>
   <br />
 </div>
 
 Below shows the header of the training set, validation set and testing set. There are mainly four columns for all datasets, in which `id` is the identifier, `commen_text` is the text of comment, `lang` is the language of the comment, and `toxic` is whether or not the comment is toxic. In the training set, we can see 5 additional columns which represent the subtypes of toxic comment. Moreover, we do not have the `toxic` column in the testing set.
 
-<div class="verticalcenter" markdown="1">
+<div class="img-div" markdown="0">
   <image src="/images/starter-blog/train_header.png"/>
   <br />
   <figcaption>Top 5 rows of the training set</figcaption>
 </div>
 
-<div class="verticalcenter" markdown="1">
+<div class="img-div" markdown="0">
   <image src="/images/starter-blog/validation_header.png"/>
   <br />
   <figcaption>Top 5 rows of the validation set</figcaption>
 </div>
 
-<div class="verticalcenter" markdown="1">
+<div class="img-div" markdown="0">
   <image src="/images/starter-blog/test_header.png"/>
   <br />
   <figcaption>Top 5 rows the testing set</figcaption>
@@ -134,7 +134,7 @@ We can do a few data preprocessing steps before feeding the data into a language
 
 First we take an overview of the comments in the training set. 
 
-<div class="verticalcenter" markdown="0">
+<div class="img-div" markdown="0">
   <image src="/images/starter-blog/common_words.png"/>
   <br />
   <figcaption>Wordclouds of the comment texts</figcaption>
@@ -144,7 +144,7 @@ We can see that the most common words include "Wikipedia", "article", "will" and
 
 The figure below shows the distribution of the length of the comment texts. One can see that the distribution if right-skewed and peaked at around a position of $13$ words. 
 
-<div class="verticalcenter" markdown="0">
+<div class="img-div" markdown="0">
   <image src="/images/starter-blog/comments_length.png"/>
   <br />
   <figcaption>Comment length distribution</figcaption>
@@ -152,7 +152,7 @@ The figure below shows the distribution of the length of the comment texts. One 
 
 This bar plot indicates that the balance of the dataset is around $21384/(21384+202165) \approx 90\%$. 
 
-<div class="verticalcenter" markdown="0">
+<div class="img-div" markdown="0">
   <image src="/images/starter-blog/balance.png"/>
   <br />
   <figcaption>Counts of the toxic and non-toxic comments</figcaption>
@@ -160,7 +160,7 @@ This bar plot indicates that the balance of the dataset is around $21384/(21384+
 
 Lastly we summarize the common words in the toxic comments in another worldclouds plot. *Disclaimer: The following figure contains text that may be considered profane, vulgar, or offensive.* 
 
-<div class="verticalcenter" markdown="0">
+<div class="img-div" markdown="0">
   <image src="/images/starter-blog/toxic_common_words.png"/ >
 </div>
 
@@ -171,7 +171,7 @@ Obviously, toxic comments use more insulting or hateful words such as "f\*\*k".
 ### What is a Language Model?
 A language model is basically a machine learning model that looks at part of a sentence and is able to predict the next one, such as next word recommendation for cellphone keyboard typing. 
 
-<div class="verticalcenter" markdown="1">
+<div class="img-div" markdown="0">
   <image src="http://jalammar.github.io/images/word2vec/swiftkey-keyboard.png"/>
   <br />
 </div>
