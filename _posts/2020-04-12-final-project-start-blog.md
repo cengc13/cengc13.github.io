@@ -46,7 +46,7 @@ Basically it is a classification problem. The model performance is evaluated by 
 
 The submission file consists of two columns. The first column indicates the comment `id` and the second one is the probability for the `toxicity` variable. Following is an example submission file.
 
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html>
 <head>
 <style>
@@ -88,6 +88,29 @@ th {
 ## <a href="#part-2-eda" name="part-2-eda">Part 2: EDA </a>
 
 ### Dataset
+Following is the list of the datasets we have for this project. The primary data is the `comment_text` column which contains the text of comment to be classified as toxic or non-toxic (0...1 in the `toxic` column). The trainingset's comments are mostly written in English whereas the validation and testing sets' comments are composed of multiple non-English languages. A detailed explanation of the dataset can be found on the [competition webpage](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/data)
+
+<div class="img-div-any-width" markdown="0">
+  <image src="/images/starter-blog/datasets.png"/>
+  <br />
+</div>
+
+Below shows the header of the training set, validation set and testing set. There are mainly four columns for all datasets, in which `id` is the identifier, `commen_text` is the text of comment, `lang` is the language of the comment, and `toxic` is whether or not the comment is toxic. In the training set, we can see 5 additional columns which represent the subtypes of toxic comment. Moreover, we do not have the `toxic` column in the testing set.
+
+<div class="img-div-any-width" markdown="1">
+  <image src="/images/starter-blog/train_header.png"/>
+  <br />
+</div>
+
+<div class="img-div-any-width" markdown="1">
+  <image src="/images/starter-blog/validation_header.png"/>
+  <br />
+</div>
+
+<div class="img-div-any-width" markdown="1">
+  <image src="/images/starter-blog/test_header.png"/>
+  <br />
+</div>
 
 ### Preprocessing
 
