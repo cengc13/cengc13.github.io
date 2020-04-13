@@ -1,9 +1,8 @@
 ---
 layout: prediction_post
 published: True
-title: Jiasaw Multilingual Toxic Comment Classification: Starter Blog
+title: Jiasaw Multilingual Toxic Comment Classification-Starter Blog
 ---
-
 
 This project is an ongoing Kaggle Competition. It lives at [toxic comment classification](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification). It is a natural language processing (NLP) task. I chose this topic as the final project because NLP is a very hot topic nowadays and I am new to this area. I hope to take advantages of this opportunity to learn more about deep learning targeted towards the state-of-art application in NLP. 
 
