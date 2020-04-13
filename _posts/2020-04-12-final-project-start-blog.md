@@ -85,6 +85,12 @@ th {
 </body>
 </html>
 
+In addition to the well defined metrics evaluted on the given testing set. We might also want to futher apply the language model to additional applications. For example
+
+* As mentioned before, there is another NLP competition on Kaggle, which challenges contestants to analyze the tweet sentiment. Basically there are three types of sentiment, including *neural*, *negative* and *positive*. 
+
+* Another possible application is to scrape comments from some social media, say "reddit", and predict whether the comment will receive upvote, downvote or be removed.
+
 ## <a href="#part-2-eda" name="part-2-eda">Part 2: EDA </a>
 
 ### Dataset
@@ -100,28 +106,110 @@ Below shows the header of the training set, validation set and testing set. Ther
 <div class="img-div-any-width" markdown="1">
   <image src="/images/starter-blog/train_header.png"/>
   <br />
+  Header of the training set
 </div>
 
 <div class="img-div-any-width" markdown="1">
   <image src="/images/starter-blog/validation_header.png"/>
   <br />
+  Header of the validation set
 </div>
 
 <div class="img-div-any-width" markdown="1">
   <image src="/images/starter-blog/test_header.png"/>
   <br />
+  Header of the testing set
 </div>
 
 ### Preprocessing
+We can do a few data preprocessing steps before feeding the data into a language model. 
+
+- Clean up the comment texts by dropping redundant information, such as usernames, emails, hyperlinks and line breakers.
+
+- Remove unnecessary columns in the trainingset such as the subtypes of toxic because the target is only `toxic`.
+
+- Tokenize the words, which can also be taken as a step of setting up a model.
 
 ### EDA
+
+First we take an overview of the comments in the training set. 
+
+<div class="img-div-any-width" markdown="0">
+  <image src="/images/starter-blog/common_words.png"/>
+  <br />
+  Wordclouds of the comment texts
+</div>
+
+We can see that the most common words include "Wikipedia", "article", "will" and "see". Aggressive and disrespectful words seems to occur less often.
+
+The figure below shows the distribution of the length of the comment texts. One can see that the distribution if right-skewed and peaked at around a position of $13$ words. 
+
+<div class="img-div-any-width" markdown="0">
+  <image src="/images/starter-blog/comments_length.png"/>
+  <br />
+  Wordclouds of the comment texts
+</div>
+
+This bar plot indicates that the balance of the dataset is around $21384/(21384+202165) \approx 90\%$. 
+
+<div class="img-div-any-width" markdown="0">
+  <image src="/images/starter-blog/balance.png"/>
+  <br />
+  Wordclouds of the comment texts
+</div>
+
+Lastly we summarize the common words in the toxic comments in another worldclouds plot. *Disclaimer: The following figure contains text that may be considered profane, vulgar, or offensive.* 
+
+<div class="img-div-any-width" markdown="0">
+  <image src="/images/starter-blog/toxic_common_words.png"/>
+  <br />
+  Wordclouds of the toxic comment texts
+</div>
+
+Obviously, toxic comments use more insulting or hateful words such as "f\*\*k". 
 
 ## <a href="#part-3-basics-of-language-models" name="part-3-basics-of-language-models">Part 3: Basics of Language Models </a>
 
 ### What is a Language Model?
+A language model is basically a machine learning model that looks at part of a sentence and is able to predict the next one, such as next word recommendation for cellphone keyboard typing. 
+
+<div class="img-div-any-width" markdown="1">
+  <image src="http://jalammar.github.io/images/word2vec/swiftkey-keyboard.png"/>
+  <br />
+</div>
+
+Statistically, a language model is a probability distribution over sequence of words. Most language models rely on the basic assumption that the probability of a word only depends on the previous $n$ words, which is known as the $n$-gram model. Langugae models are useful in many scenarios such speech recognition, parsing and information retrieval. For more explanation, please refer to the wiki page for [language models](https://en.wikipedia.org/wiki/Language_model). 
 
 ### Word Embeddings
+Word embedding is a type of word respresentation that allows words with similar meaning to have a similar representation. It is a groundbreaking progress for developing high-performance deep learning models for NLP. The intuitive approach to word representation is the **one-hot** encoding. To represent each word, we create a zero vector with length equal to the vocabulary. Then one is placed in the index that corresponds to the word. In that sense, we will create a sparse vector. An alternative approach is to encode each word with a unique number so that the resulting vector is short and dense. However, the way how each word is encoded is arbitrary, and we do not know the relationship between the words. Here comes the technique of **word embeddings**. In this scenario, we do not have to specify the encoding by hand. Instead of manually defining the embedding vector, the values of the vector are trained in the same way a model learns weights of a dense layer. A high-dimensional embedding can capture fine relationships between words. More articles about word embedding can be found in the following readings.
 
-### Self Attention
+- (What are word embeddings?)[https://machinelearningmastery.com/what-are-word-embeddings/]
+
+- (Word embeddings in Tensorflow)[https://www.tensorflow.org/tutorials/text/word_embeddings]
+
+- (NLP: Everything about Embeddings)[https://medium.com/@b.terryjack/nlp-everything-about-word-embeddings-9ea21f51ccfe]
+
+### Attention
+
+The key idea of Attention is to focus on the most relevant parts of the input sequence as needed. It provides a direct path to the inputs. So it also alleviates the vanishing gradient issue. This significantly improves the model performance when confronting with long sentence analysis. 
+
+For a typical language model, it is composed of an encoder and a decoder.
+The encoder processes each item in the input sequence, and then compile the transformed information into a vector. After processing the entire input sequence, the encoder send the context to the decoder for the next step. Both the encoder and decoder are intrinsically recurrent nueral networks (RNN) which processes the input vector and previous hidden state, and produces the next-step hidden state and output at that time step. 
+
+At a high level of abstraction, an attention model differs in two main ways. Firstly, instead of passing only the last hidden state at the encoder side, the attention model holds all the hidden states and passes all hidden state to the decoder. Secondly, in the decoder side it does one more step before calculating its output. The basic idea is that each hidden state produced at the encoder side is associated with a certain word in the input sequence, thus we can assign a score to each hidden state and use that to amplify the word with high score and drown out words with low scores. A illustrative and comprehensive tutorial of an attention model can be found in the blog [visualizing a neural machine translation model](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/). Other useful links are also attached at below.
+
+- [Attnetion and its Different Forms](https://towardsdatascience.com/attention-and-its-different-forms-7fc3674d14dc)
+
+- [NLP FROM SCRATCH: TRANSLATION WITH A SEQUENCE TO SEQUENCE NETWORK AND ATTENTION](https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html)
+
+## Acknowledgements
+
+- [EDA and Modelling Kernel](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models) ~ by Tarun Paparaju
+
+- [Illustrative Attention](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/) ~ by Jay Alammer
+
+- [Polyglot](https://pypi.org/project/polyglot/) ~ by aboSamoor
+
+- [github blog template](https://github.com/barryclark/jekyll-now) ~ by Barry Clark
 
 <!-- ### BERT -->
