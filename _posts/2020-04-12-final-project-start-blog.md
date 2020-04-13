@@ -27,7 +27,7 @@ In this starter blog, I will walk you through the overview of the competition, e
 * **[Part 3: Basics of Language Models](#part-3-basics-of-language-models)**
   * What is a Language Model?
   * Word Embeddings
-  * Self Attention
+  * Attention
 
 </div>
 
@@ -95,7 +95,7 @@ In addition to the well defined metrics evaluted on the given testing set. We mi
 ### Dataset
 Following is the list of the datasets we have for this project. The primary data is the `comment_text` column which contains the text of comment to be classified as toxic or non-toxic (0...1 in the `toxic` column). The trainingset's comments are mostly written in English whereas the validation and testing sets' comments are composed of multiple non-English languages. A detailed explanation of the dataset can be found on the [competition webpage](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/data)
 
-<div class="img-div" markdown="0">
+<div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/starter-blog/datasets.png"/>
   <br />
 </div>
