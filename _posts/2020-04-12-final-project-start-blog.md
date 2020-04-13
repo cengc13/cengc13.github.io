@@ -96,29 +96,29 @@ In addition to the well defined metrics evaluted on the given testing set. We mi
 ### Dataset
 Following is the list of the datasets we have for this project. The primary data is the `comment_text` column which contains the text of comment to be classified as toxic or non-toxic (0...1 in the `toxic` column). The trainingset's comments are mostly written in English whereas the validation and testing sets' comments are composed of multiple non-English languages. A detailed explanation of the dataset can be found on the [competition webpage](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/data)
 
-<div class="img-div-any-width" markdown="0">
+<div class="verticalcenter" markdown="0">
   <image src="/images/starter-blog/datasets.png"/>
   <br />
 </div>
 
 Below shows the header of the training set, validation set and testing set. There are mainly four columns for all datasets, in which `id` is the identifier, `commen_text` is the text of comment, `lang` is the language of the comment, and `toxic` is whether or not the comment is toxic. In the training set, we can see 5 additional columns which represent the subtypes of toxic comment. Moreover, we do not have the `toxic` column in the testing set.
 
-<div class="img-div-any-width" markdown="1">
+<div class="verticalcenter" markdown="1">
   <image src="/images/starter-blog/train_header.png"/>
   <br />
-  Header of the training set
+  <figcaption>Top 5 rows of the training set</figcaption>
 </div>
 
-<div class="img-div-any-width" markdown="1">
+<div class="verticalcenter" markdown="1">
   <image src="/images/starter-blog/validation_header.png"/>
   <br />
-  Header of the validation set
+  <figcaption>Top 5 rows of the validation set</figcaption>
 </div>
 
-<div class="img-div-any-width" markdown="1">
+<div class="verticalcenter" markdown="1">
   <image src="/images/starter-blog/test_header.png"/>
   <br />
-  Header of the testing set
+  <figcaption>Top 5 rows the testing set</figcaption>
 </div>
 
 ### Preprocessing
@@ -134,36 +134,34 @@ We can do a few data preprocessing steps before feeding the data into a language
 
 First we take an overview of the comments in the training set. 
 
-<div class="img-div-any-width" markdown="0">
+<div class="verticalcenter" markdown="0">
   <image src="/images/starter-blog/common_words.png"/>
   <br />
-  Wordclouds of the comment texts
+  <figcaption>Wordclouds of the comment texts</figcaption>
 </div>
 
 We can see that the most common words include "Wikipedia", "article", "will" and "see". Aggressive and disrespectful words seems to occur less often.
 
 The figure below shows the distribution of the length of the comment texts. One can see that the distribution if right-skewed and peaked at around a position of $13$ words. 
 
-<div class="img-div-any-width" markdown="0">
+<div class="verticalcenter" markdown="0">
   <image src="/images/starter-blog/comments_length.png"/>
   <br />
-  Wordclouds of the comment texts
+  <figcaption>Comment length distribution</figcaption>
 </div>
 
 This bar plot indicates that the balance of the dataset is around $21384/(21384+202165) \approx 90\%$. 
 
-<div class="img-div-any-width" markdown="0">
+<div class="verticalcenter" markdown="0">
   <image src="/images/starter-blog/balance.png"/>
   <br />
-  Wordclouds of the comment texts
+  <figcaption>Counts of the toxic and non-toxic comments</figcaption>
 </div>
 
 Lastly we summarize the common words in the toxic comments in another worldclouds plot. *Disclaimer: The following figure contains text that may be considered profane, vulgar, or offensive.* 
 
-<div class="img-div-any-width" markdown="0">
-  <image src="/images/starter-blog/toxic_common_words.png"/>
-  <br />
-  Wordclouds of the toxic comment texts
+<div class="verticalcenter" markdown="0">
+  <image src="/images/starter-blog/toxic_common_words.png"/ >
 </div>
 
 Obviously, toxic comments use more insulting or hateful words such as "f\*\*k". 
@@ -173,7 +171,7 @@ Obviously, toxic comments use more insulting or hateful words such as "f\*\*k".
 ### What is a Language Model?
 A language model is basically a machine learning model that looks at part of a sentence and is able to predict the next one, such as next word recommendation for cellphone keyboard typing. 
 
-<div class="img-div-any-width" markdown="1">
+<div class="verticalcenter" markdown="1">
   <image src="http://jalammar.github.io/images/word2vec/swiftkey-keyboard.png"/>
   <br />
 </div>
@@ -183,11 +181,11 @@ Statistically, a language model is a probability distribution over sequence of w
 ### Word Embeddings
 Word embedding is a type of word respresentation that allows words with similar meaning to have a similar representation. It is a groundbreaking progress for developing high-performance deep learning models for NLP. The intuitive approach to word representation is the **one-hot** encoding. To represent each word, we create a zero vector with length equal to the vocabulary. Then one is placed in the index that corresponds to the word. In that sense, we will create a sparse vector. An alternative approach is to encode each word with a unique number so that the resulting vector is short and dense. However, the way how each word is encoded is arbitrary, and we do not know the relationship between the words. Here comes the technique of **word embeddings**. In this scenario, we do not have to specify the encoding by hand. Instead of manually defining the embedding vector, the values of the vector are trained in the same way a model learns weights of a dense layer. A high-dimensional embedding can capture fine relationships between words. More articles about word embedding can be found in the following readings.
 
-- (What are word embeddings?)[https://machinelearningmastery.com/what-are-word-embeddings/]
+- [What are word embeddings?](https://machinelearningmastery.com/what-are-word-embeddings/)
 
-- (Word embeddings in Tensorflow)[https://www.tensorflow.org/tutorials/text/word_embeddings]
+- [Word embeddings in Tensorflow](https://www.tensorflow.org/tutorials/text/word_embeddings)
 
-- (NLP: Everything about Embeddings)[https://medium.com/@b.terryjack/nlp-everything-about-word-embeddings-9ea21f51ccfe]
+- [NLP: Everything about Embeddings](https://medium.com/@b.terryjack/nlp-everything-about-word-embeddings-9ea21f51ccfe)
 
 ### Attention
 
