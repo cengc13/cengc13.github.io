@@ -17,7 +17,7 @@ In this starter blog, I will walk you through the overview of the competition, e
 
 </div>
 
-* **[Part 1: Introduction](#part1-introduction-and-background)**
+* **[Part 1: Introduction](#part-1-introduction-and-background)**
   * Background & Motivation
   * Description of The Competition
   * Evaluation Metrics
@@ -34,7 +34,7 @@ In this starter blog, I will walk you through the overview of the competition, e
 
 </div>
 
-## <a href="#part1-introduction-and-background" name="part1-introduction-and-background">Part 1: Introduction </a>
+## <a href="#part-1-introduction-and-background" name="part-1-introduction-and-background">Part 1: Introduction </a>
 
 ### Background & Motivation
 
@@ -44,7 +44,7 @@ In this starter blog, I will walk you through the overview of the competition, e
 
 ### Submission Requirements
 
-## <a href="#part2-eda" name="part2-eda">Part 2: EDA </a>
+## <a href="#part-2-eda" name="part-2-eda">Part 2: EDA </a>
 
 ### Dataset
 
@@ -52,7 +52,7 @@ In this starter blog, I will walk you through the overview of the competition, e
 
 ### EDA
 
-## <a href="#part3-basics-of-language-models" name="part3-basics-of-language-models">Part 3: Basics of Language Models </a>
+## <a href="#part-3-basics-of-language-models" name="part-3-basics-of-language-models">Part 3: Basics of Language Models </a>
 
 ### What is a Language Model?
 
