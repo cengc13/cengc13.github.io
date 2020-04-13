@@ -17,7 +17,7 @@ In this starter blog, I will walk you through the overview of the competition, e
 
 </div>
 
-* **[Part 1: Introduction](#introduction-and-background)**
+* **[Part 1: Introduction](#part1-introduction-and-background)**
   * Background & Motivation
   * Description of The Competition
   * Evaluation Metrics
@@ -26,7 +26,7 @@ In this starter blog, I will walk you through the overview of the competition, e
   * Dataset
   * Preprocessing
   * EDA
-* **[Part 3: Basics of Language Models](#part-3-beyond-language-modeling)**
+* **[Part 3: Basics of Language Models](#part-3-basics-of-language-models)**
   * What is a Language Model?
   * Word Embeddings
   * Self Attention
@@ -34,7 +34,7 @@ In this starter blog, I will walk you through the overview of the competition, e
 
 </div>
 
-## <a href="#introduction-and-background" name="part1-introduction-and-background">Part 1: Introduction </a>
+## <a href="#part1-introduction-and-background" name="part1-introduction-and-background">Part 1: Introduction </a>
 
 ### Background & Motivation
 
@@ -44,7 +44,7 @@ In this starter blog, I will walk you through the overview of the competition, e
 
 ### Submission Requirements
 
-## <a href="#eda" name="eda">Part 2: EDA </a>
+## <a href="#part2-eda" name="part2-eda">Part 2: EDA </a>
 
 ### Dataset
 
@@ -52,8 +52,7 @@ In this starter blog, I will walk you through the overview of the competition, e
 
 ### EDA
 
-## <a href="#basics-of-language-models" 
-name="basics-of-language-models">Part 3: Basics of Language Models </a>
+## <a href="#part3-basics-of-language-models" name="part3-basics-of-language-models">Part 3: Basics of Language Models </a>
 
 ### What is a Language Model?
 
