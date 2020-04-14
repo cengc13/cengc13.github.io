@@ -45,7 +45,6 @@ Basically it is a classification problem. The model performance is evaluated by 
 
 The submission file consists of two columns. The first column indicates the comment `id` and the second one is the probability for the `toxicity` variable. Following is an example submission file.
 
-<!-- <!DOCTYPE html> -->
 <html>
 <head>
 <style>
@@ -63,7 +62,7 @@ th {
 </head>
 <body>
 
-<table style="width:100%">
+<table style="width:50%">
   <tr>
     <th>id</th>
     <th>toxic</th>
@@ -102,19 +101,19 @@ Following is the list of the datasets we have for this project. The primary data
 
 Below shows the header of the training set, validation set and testing set. There are mainly four columns for all datasets, in which `id` is the identifier, `commen_text` is the text of comment, `lang` is the language of the comment, and `toxic` is whether or not the comment is toxic. In the training set, we can see 5 additional columns which represent the subtypes of toxic comment. Moreover, we do not have the `toxic` column in the testing set.
 
-<div class="img-div" markdown="0">
+<div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/starter-blog/train_header.png"/>
   <br />
   <figcaption>Top 5 rows of the training set</figcaption>
 </div>
 
-<div class="img-div" markdown="0">
+<div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/starter-blog/validation_header.png"/>
   <br />
   <figcaption>Top 5 rows of the validation set</figcaption>
 </div>
 
-<div class="img-div" markdown="0">
+<div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/starter-blog/test_header.png"/>
   <br />
   <figcaption>Top 5 rows the testing set</figcaption>
@@ -133,17 +132,17 @@ We can do a few data preprocessing steps before feeding the data into a language
 
 First we take an overview of the comments in the training set. 
 
-<div class="img-div" markdown="0">
+<div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/starter-blog/common_words.png"/>
   <br />
-  <figcaption>Wordclouds of the comment texts</figcaption>
+  <font size="6">Wordclouds of the comment texts</font>
 </div>
 
 We can see that the most common words include "Wikipedia", "article", "will" and "see". Aggressive and disrespectful words seems to occur less often.
 
 The figure below shows the distribution of the length of the comment texts. One can see that the distribution if right-skewed and peaked at around a position of $$13$$ words. 
 
-<div class="img-div" markdown="0">
+<div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/starter-blog/comments_length.png"/>
   <br />
   <figcaption>Comment length distribution</figcaption>
@@ -151,7 +150,7 @@ The figure below shows the distribution of the length of the comment texts. One 
 
 This bar plot indicates that the balance of the dataset is around $$21384/(21384+202165) \approx 90\%$$. 
 
-<div class="img-div" markdown="0">
+<div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/starter-blog/balance.png"/>
   <br />
   <figcaption>Counts of the toxic and non-toxic comments</figcaption>
@@ -159,7 +158,7 @@ This bar plot indicates that the balance of the dataset is around $$21384/(21384
 
 Lastly we summarize the common words in the toxic comments in another worldclouds plot. *Disclaimer: The following figure contains text that may be considered profane, vulgar, or offensive.* 
 
-<div class="img-div" markdown="0">
+<div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/starter-blog/toxic_common_words.png" />
 </div>
 
@@ -170,7 +169,7 @@ Obviously, toxic comments use more insulting or hateful words such as "f\*\*k".
 ### What is a Language Model?
 A language model is basically a machine learning model that looks at part of a sentence and is able to predict the next one, such as next word recommendation for cellphone keyboard typing. 
 
-<div class="img-div" markdown="0">
+<div class="img-div" markdown="0" style="text-align:center">
   <image src="http://jalammar.github.io/images/word2vec/swiftkey-keyboard.png"/>
   <br />
 </div>
