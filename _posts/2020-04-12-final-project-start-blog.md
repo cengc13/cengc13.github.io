@@ -135,7 +135,7 @@ First we take an overview of the comments in the training set.
 <div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/starter-blog/common_words.png"/>
   <br />
-  <font size="6">Wordclouds of the comment texts</font>
+  <figcaption>Wordclouds of the comment texts</figcaption>
 </div>
 
 We can see that the most common words include "Wikipedia", "article", "will" and "see". Aggressive and disrespectful words seems to occur less often.
