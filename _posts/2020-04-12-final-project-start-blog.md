@@ -1,7 +1,7 @@
 ---
 layout: prediction_post
 published: True
-title: Jigsaw Multilingual Toxic Comment Classification-Starter Blog
+title: Jigsaw Multilingual Toxic Comment Classification-Start Blog
 ---
 
 This project is an ongoing Kaggle Competition. It lives at [toxic comment classification](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification). It is a natural language processing (NLP) task. I chose this topic as the final project because NLP is a very hot topic nowadays and I am new to this area. I hope to take advantages of this opportunity to learn more about deep learning targeted towards the state-of-art application in NLP. 
@@ -183,7 +183,7 @@ Word embedding is a type of word respresentation that allows words with similar 
 
 - [What are word embeddings?](https://machinelearningmastery.com/what-are-word-embeddings/)
 
-- [Word embeddings in Tensorflow](https://www.tensorflow.org/tutorials/text/word_embeddings)
+- [Word Embeddings with Tensorflow](https://www.tensorflow.org/tutorials/text/word_embeddings)
 
 - [NLP: Everything about Embeddings](https://medium.com/@b.terryjack/nlp-everything-about-word-embeddings-9ea21f51ccfe)
 
@@ -202,10 +202,10 @@ At a high level of abstraction, an attention model differs in two main ways. Fir
 
 ## Acknowledgements
 
-- [EDA and Modelling Kernel](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models) ~ by Tarun Paparaju
+- [EDA and Modeling Kernel](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models) ~ by Tarun Paparaju
 
 - [Illustrative Attention](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/) ~ by Jay Alammer
 
 - [Polyglot](https://pypi.org/project/polyglot/) ~ by aboSamoor
 
-- [github blog template](https://github.com/barryclark/jekyll-now) ~ by Barry Clark
+- [Github blog template](https://github.com/barryclark/jekyll-now) ~ by Barry Clark
