@@ -4,9 +4,13 @@ published: True
 title: Jigsaw Multilingual Toxic Comment Classification-Start Blog
 ---
 
-This project is an ongoing Kaggle Competition. It lives at [toxic comment classification](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification). It is a natural language processing (NLP) task. I chose this topic as the final project because NLP is a very hot topic nowadays and I am new to this area. I hope to take advantages of this opportunity to learn more about deep learning targeted towards the state-of-art application in NLP. 
+This is the first of three blogs documenting my entry into the [toxic comment classification kaggle competition](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification). It is a natural language processing (NLP) task. I chose this topic as the final project because NLP is a very hot topic nowadays and I am new to this area. I hope to take advantages of this opportunity to learn more about deep learning targeted towards the state-of-art application in NLP. 
 
-In this starter blog, I will walk you through the overview of the competition, exploratory data analysis, and  basics of language models for this project. The outline will be as follows.
+In the first blog, I walk you through an overview of the competition, the exploratory data analysis, and  the basics of language models for this project.
+
+<center><img src="https://i.imgur.com/4WNesOq.png" width="400px"></center>
+
+<!--more-->
 
 <div style="font-size:75%; background-color:#eee; border: 1px solid #bbb; display: table; padding: 7px" markdown="1">
 
@@ -37,10 +41,9 @@ In this starter blog, I will walk you through the overview of the competition, e
 Thanks to the rapid development of deeping learning techniques and computational hardwares, NLP has been gaining its momentum in the past two decades. As believed by machine learning experts, NLP is experiencing a boom in the short-term future, same as computer vision once did. The popularity of it brought a great amount of investment. Recently Kaggle released two NLP competitions ([tweet sentiment extraction](https://www.kaggle.com/c/tweet-sentiment-extraction) and [comment toxicity analysis](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification)). Of focus here is the second one because it is based off two previous Kaggle competitions regarding the same topic ([2018 toxicity](https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge) and [2019 toxicity](https://www.kaggle.com/c/jigsaw-unintended-bias-in-toxicity-classification)). For the very first competion, contestants are challenged to buld multi-headed models to recognize toxicity and several subtypes of toxicity. *Toxicity is defined as anything rude, disrespectful or other wise likely to make someone leave a discussion*. The 2019 Challenges asks Kagglers to work across a diverse range of conversations. The main purpose of this final project is to understand the basics of deep learning techniques applied to NLP. So it would be more doable to work on a project in such a limited time for which there exist many established references/documents. 
 
 
-<!--more-->
  
 ### Description of The Competition
-Taking advantage of Kaggle's TPU support, this competition aims to build multilingual models with English-only training data. The model will be tested on Wikipedia talk page comments in several different languages. It is supported by [The Conversation AI team], funded by [Jiasaw](https://jigsaw.google.com/) and Google. Its mission is *to create future-defining research and technology to keep our world safer*. 
+Taking advantage of Kaggle's TPU support, this competition aims to build multilingual models with English-only training data. The model will be tested on Wikipedia talk page comments in several different languages. It is supported by The Conversation AI team, which is funded by [Jiasaw](https://jigsaw.google.com/) and Google. 
 
 ### Evaluation Metrics and Submission Requirements
 Basically it is a classification problem. The model performance is evaluated by the [area under the ROC curve](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) between the predictions and the observations.
@@ -85,7 +88,7 @@ th {
 </body>
 </html>
 
-In addition to the well defined metrics evaluted on the given testing set. We might also want to futher apply the language model to additional applications. For example
+In addition to the well defined metrics evaluted on the given testing set. We might also want to futher apply the language model to additional applications. For example,
 
 * As mentioned before, there is another NLP competition on Kaggle, which challenges contestants to analyze the tweet sentiment. Basically there are three types of sentiment, including *neural*, *negative* and *positive*. 
 
@@ -101,7 +104,7 @@ Following is the list of the datasets we have for this project. The primary data
   <br />
 </div>
 
-Below shows the header of the training set, validation set and testing set. There are mainly four columns for all datasets, in which `id` is the identifier, `commen_text` is the text of comment, `lang` is the language of the comment, and `toxic` is whether or not the comment is toxic. In the training set, we can see 5 additional columns which represent the subtypes of toxic comment. Moreover, we do not have the `toxic` column in the testing set.
+Below shows the five top rows of the training set, validation set and testing set. There are mainly four columns for all datasets, in which `id` is the identifier, `commen_text` is the text of comment, `lang` is the language of the comment, and `toxic` is whether or not the comment is toxic. In the training set, we can see 5 additional columns which represent the subtypes of toxic comment. Moreover, we do not have the `toxic` column in the testing set.
 
 <div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/starter-blog/train_header.png"/>
@@ -126,11 +129,13 @@ We can do a few data preprocessing steps before feeding the data into a language
 
 - Clean up the comment texts by dropping redundant information, such as usernames, emails, hyperlinks and line breakers.
 
-- Remove unnecessary columns in the trainingset such as the subtypes of toxic because the target is only `toxic`.
+- Remove unnecessary columns in the trainingset such as the subtypes of toxicity because the target for submission is only the `toxic`.
 
-- Tokenize the words, which can also be taken as a step of setting up a model.
+- Tokenize the words, which is also a step of setting up a model.
 
 ### EDA
+
+**Note that** the EDA codes are heavily adapted from th kernel [EDA and Modeling Kernel](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models). 
 
 First we take an overview of the comments in the training set. 
 
@@ -176,7 +181,7 @@ A language model is basically a machine learning model that looks at part of a s
   <br />
 </div>
 
-Statistically, a language model is a probability distribution over sequence of words. Most language models rely on the basic assumption that the probability of a word only depends on the previous $$n$$ words, which is known as the $$n$$-gram model. Langugae models are useful in many scenarios such speech recognition, parsing and information retrieval. For more explanation, please refer to the wiki page for [language models](https://en.wikipedia.org/wiki/Language_model). 
+Statistically, a language model is a probability distribution over sequence of words. Most language models rely on the basic assumption that the probability of a word only depends on the previous *n* words, which is known as the *n*-gram model. Langugae models are useful in many scenarios such speech recognition, parsing and information retrieval. Please refer to the [wiki  page](https://en.wikipedia.org/wiki/Language_model) for more information. 
 
 ### Word Embeddings
 Word embedding is a type of word respresentation that allows words with similar meaning to have a similar representation. It is a groundbreaking progress for developing high-performance deep learning models for NLP. The intuitive approach to word representation is the **one-hot** encoding. To represent each word, we create a zero vector with length equal to the vocabulary. Then one is placed in the index that corresponds to the word. In that sense, we will create a sparse vector. An alternative approach is to encode each word with a unique number so that the resulting vector is short and dense. However, the way how each word is encoded is arbitrary, and we do not know the relationship between the words. Here comes the technique of **word embeddings**. In this scenario, we do not have to specify the encoding by hand. Instead of manually defining the embedding vector, the values of the vector are trained in the same way a model learns weights of a dense layer. A high-dimensional embedding can capture fine relationships between words. More articles about word embedding can be found in the following readings.
@@ -194,11 +199,17 @@ The key idea of Attention is to focus on the most relevant parts of the input se
 For a typical language model, it is composed of an encoder and a decoder.
 The encoder processes each item in the input sequence, and then compile the transformed information into a vector. After processing the entire input sequence, the encoder send the context to the decoder for the next step. Both the encoder and decoder are intrinsically recurrent nueral networks (RNN) which processes the input vector and previous hidden state, and produces the next-step hidden state and output at that time step. 
 
-At a high level of abstraction, an attention model differs in two main ways. Firstly, instead of passing only the last hidden state at the encoder side, the attention model holds all the hidden states and passes all hidden state to the decoder. Secondly, in the decoder side it does one more step before calculating its output. The basic idea is that each hidden state produced at the encoder side is associated with a certain word in the input sequence, thus we can assign a score to each hidden state and use that to amplify the word with high score and drown out words with low scores. A illustrative and comprehensive tutorial of an attention model can be found in the blog [visualizing a neural machine translation model](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/). Other useful links are also attached at below.
+At a high level of abstraction, an attention model differs in two main ways. Firstly, instead of passing only the last hidden state at the encoder side, the attention model holds all the hidden states and passes all hidden state to the decoder. Secondly, in the decoder side it does one more step before calculating its output. The basic idea is that each hidden state produced at the encoder side is associated with a certain word in the input sequence, thus we can assign a score to each hidden state and use that to amplify the word with high score and drown out words with low scores. A illustrative and comprehensive tutorial of an attention model can be found in the blog [visualizing a neural machine translation model](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/). Other useful resources are:
 
 - [Attention and its Different Forms](https://towardsdatascience.com/attention-and-its-different-forms-7fc3674d14dc)
 
 - [NLP FROM SCRATCH: TRANSLATION WITH A SEQUENCE TO SEQUENCE NETWORK AND ATTENTION](https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html)
+
+## Next Steps
+
+We will focus on the modeling part for this kaggle competition in the next step. The main focuses are 
+
+- Develop a baseline model 
 
 ## Acknowledgements
 
