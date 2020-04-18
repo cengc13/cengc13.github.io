@@ -137,39 +137,54 @@ We can do a few data preprocessing steps before feeding the data into a language
 
 **Note that** the EDA codes are heavily adapted from th kernel [EDA and Modeling Kernel](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models). 
 
+#### Comment Wordcloud
 First we take an overview of the comments in the training set. 
 
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/common_words.png"/>
+  <image src="/images/starter-blog/comment_wordcloud.png"/>
   <br />
   <figcaption>Wordclouds of the comment texts</figcaption>
 </div>
 
-We can see that the most common words include "Wikipedia", "article", "will" and "see". Aggressive and disrespectful words seems to occur less often.
+We can see that the most common words include "Wikipedia", "article", "will" and "see".
+
+We also summarize the common words in the toxic comments in another worldclouds plot. *Disclaimer: The following figure contains text that may be considered profane, vulgar, or offensive.* 
+
+<div class="img-div" markdown="0" style="text-align:center">
+  <image src="/images/starter-blog/toxic_wordcloud.png" />
+</div>
+
+More insulting words exist in the toxic comments. 
+
+#### Histogram of # words in the comments  
 
 The figure below shows the distribution of the length of the comment texts. One can see that the distribution if right-skewed and peaked at around a position of $$13$$ words. 
 
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/comments_length.png"/>
+  <image src="/images/starter-blog/comments_words.png"/>
   <br />
   <figcaption>Comment length distribution</figcaption>
 </div>
 
-This bar plot indicates that the balance of the dataset is around $$21384/(21384+202165) \approx 90\%$$. 
+#### Histogram of # sentences in the comments 
+
+<div class="img-div" markdown="0" style="text-align:center">
+  <image src="/images/starter-blog/comments_sentences.png"/>
+  <br />
+  <figcaption>Comment length distribution</figcaption>
+</div>
+
+Most comments are composed of one to three sentences. 
+
+#### Balance of training set
+
+This bar plot indicates that the balance of the dataset is about 90%. 
 
 <div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/starter-blog/balance.png"/>
   <br />
   <figcaption>Counts of the toxic and non-toxic comments</figcaption>
 </div>
-
-Lastly we summarize the common words in the toxic comments in another worldclouds plot. *Disclaimer: The following figure contains text that may be considered profane, vulgar, or offensive.* 
-
-<div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/toxic_common_words.png" />
-</div>
-
-Obviously, toxic comments use more insulting or hateful words such as "f\*\*k". 
 
 ## <a href="#part-3-basics-of-language-models" name="part-3-basics-of-language-models">Part 3: Basics of Language Models </a>
 
