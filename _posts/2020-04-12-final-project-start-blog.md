@@ -161,7 +161,7 @@ More insulting words exist in the toxic comments.
 The figure below shows the distribution of the length of the comment texts. One can see that the distribution if right-skewed and peaked at around a position of $$13$$ words. 
 
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/comments_words.png"/>
+  <image src="/images/starter-blog/comment_words.png"/>
   <br />
   <figcaption>Comment length distribution</figcaption>
 </div>
@@ -169,7 +169,7 @@ The figure below shows the distribution of the length of the comment texts. One 
 #### Histogram of # sentences in the comments 
 
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/comments_sentences.png"/>
+  <image src="/images/starter-blog/comment_sentences.png"/>
   <br />
   <figcaption>Comment length distribution</figcaption>
 </div>
