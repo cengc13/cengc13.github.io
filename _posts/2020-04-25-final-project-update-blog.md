@@ -124,21 +124,6 @@ Below shows the five top rows of the training set, validation set and testing se
   <figcaption>Top 5 rows the testing set</figcaption>
 </div>
 
-As mentioned before, most comments in the training set are in English while most comments in validation and testing set are in Non-English, including Spanish, French, Turkish and portuguese etc. The number for all types of languages in validation and test set are summarized at below.
-
-<div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/validation_languages.png"/>
-  <br />
-  <figcaption>Number of langugaes in the validation set</figcaption>
-</div>
-
-<div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/test_languages.png"/>
-  <br />
-  <figcaption>Number of langugaes in the test set</figcaption>
-</div>
-
-
 ### Preprocessing
 We can do a few data preprocessing steps before feeding the data into a language model. 
 
