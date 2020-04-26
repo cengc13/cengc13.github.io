@@ -178,7 +178,7 @@ The figure below shows the distribution of the length of the comment texts. One 
 <div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/starter-blog/comment_words.png"/>
   <br />
-  <figcaption>Comment length distribution</figcaption>
+  <figcaption>Distribution of number of words in the comments</figcaption>
 </div>
 
 #### Histogram of # sentences in the comments 
@@ -186,7 +186,7 @@ The figure below shows the distribution of the length of the comment texts. One 
 <div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/starter-blog/comment_sentences.png"/>
   <br />
-  <figcaption>Comment length distribution</figcaption>
+  <figcaption>Distribution of number of sentences in the comments</figcaption>
 </div>
 
 Most comments are composed of one to three sentences. 
@@ -237,9 +237,8 @@ At a high level of abstraction, an attention model differs in two main ways. Fir
 
 ## Next Steps
 
-We will focus on the modeling part for this kaggle competition in the next step. The main focuses are 
+We will discuss some of the start-of-the-art multilingual models, develop the baseline model using the simplest logistic regression and brainstorm possible methods to improve our model importance.
 
-- Develop a baseline model 
 
 ## Acknowledgements
 
