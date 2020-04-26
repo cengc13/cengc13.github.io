@@ -6,7 +6,7 @@ title: Jigsaw Multilingual Toxic Comment Classification-Midway Blog
 
 This blog is the second of the three blogs documenting my entry into [toxic comment classification kaggle competition](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification). In the [first blog](https://cengc13.github.io/final-project-start-blog/), we introduced the dataset, the EDA analysis and some fundamental knowledge about a language model. To move forward, the primary purpose of the next step is to develop the baseline model from scratch. The essential components of a language model will be summarized, such as the tokenizer, the model architecture, and the evaluation metrics. In addition, we will cover some state-of-the-art multilingual models, such as BERT, XLM and XLM-RoBERT.
 
-<center><img src="https://www.topbots.com/wp-content/uploads/2019/02/NLP_feature_image_1600px-1280x640.jpg" width="400px"></center>
+<center><img src="https://www.topbots.com/wp-content/uploads/2019/02/NLP_feature_image_1600px-1280x640.jpg" width="800px"></center>
 
 
 <!--more-->
@@ -106,14 +106,14 @@ y_train, y_test = y_train.astype(int), y_test.astype(int)
 
 ### Tokenizer
 
-A tokenizer works as a pipeline. It processes some raw text as input and output encoding. It is usually structured into three steps. Here we will use the example provided in the blog ["A Visual Guide to Using BERT for the First Time"](http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/). For instance, if we would like to classify the sentence "“a visually stunning rumination on love", the tokenizer will firstly split the sentences into words with some separator, say whitespace. In the next step, special tokens will be added for sentence classifications for some tokenizers. 
+A tokenizer works as a pipeline. It processes some raw text as input and output encoding. It is usually structured into three steps. Here we illustrate the idea of tokenization by the example provided in the blog ["A Visual Guide to Using BERT for the First Time"](http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/). For instance, if we would like to classify the sentence "“a visually stunning rumination on love", the tokenizer will firstly split the sentences into words with some separator, say whitespace. In the next step, special tokens will be added for sentence classifications for some tokenizers. 
 
-<center><img src="http://jalammar.github.io/images/distilBERT/bert-distilbert-tokenization-1.png" width="400px"></center>
+<center><img src="http://jalammar.github.io/images/distilBERT/bert-distilbert-tokenization-1.png" width="800px"></center>
 
 
 The final step is to replace each token with its numeric id from the embedding table, which is a natural component of a pre-trained model. Then the sentence is ready to be sent for a language model to be processed.
 
-<center><img src="http://jalammar.github.io/images/distilBERT/bert-distilbert-tokenization-2-token-ids.png" width="400px"></center>
+<center><img src="http://jalammar.github.io/images/distilBERT/bert-distilbert-tokenization-2-token-ids.png" width="800px"></center>
 
 For the purpose of demonstration, in the baseline model, we will use a classic tokenization method `TF-IDF`, which is short for "term frequency-inverse document frequency". Basically it counts the number of occurrence of a word in the documents, and then it is offset by the number of documents that contain the word. This tokenization approach is available in the package `sklearn`. 
 
@@ -133,8 +133,7 @@ In addition, (HUGGING FACE)[https://huggingface.co/] provides a open-source pack
 ```python
 import transformers as ppb
 # For DistilBERT:
-tokenizer_class, pretrained_weights = (ppb.DistilBertTokenizer, 
-									   'distilbert-base-uncased')
+tokenizer_class, pretrained_weights = (ppb.DistilBertTokenizer, 'distilbert-base-uncased')
 # load pretrained tokenizer
 tokenizer = tokenizer_class.from_pretrained(pretrained_weights)
 ```
