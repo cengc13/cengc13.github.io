@@ -43,7 +43,7 @@ Thanks to the rapid development of deeping learning techniques and computational
 
  
 ### Description of The Competition
-Taking advantage of Kaggle's TPU support, this competition aims to build multilingual models with English-only training data. The model will be tested on Wikipedia talk page comments in several different languages. It is supported by The Conversation AI team, which is funded by [Jiasaw](https://jigsaw.google.com/) and Google. 
+Taking advantage of Kaggle's TPU support, this competition aims to build multilingual models with English-only training data. The model will be tested on Wikipedia talk page comments in several different languages. It is supported by The Conversation AI team, which is funded by [Jiasaw](https://jigsaw.google.com/)and Google. 
 
 ### Evaluation Metrics and Submission Requirements
 Basically it is a classification problem. The model performance is evaluated by the [area under the ROC curve](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) between the predictions and the observations.
@@ -150,7 +150,7 @@ We can do a few data preprocessing steps before feeding the data into a language
 
 ### EDA
 
-**Note that** the EDA codes are heavily adapted from th kernel [EDA and Modeling Kernel](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models). 
+**Note that** the analysis for wordcloud is adapted from this kernel [EDA and Modeling Kernel](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models). 
 
 #### Comment Wordcloud
 First we take an overview of the comments in the training set. 
