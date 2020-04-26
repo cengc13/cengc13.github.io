@@ -128,7 +128,7 @@ X_train_fitted = tfidf_vectorizer.fit_transform(X_train)
 X_test_fitted = tfidf_vectorizer.transform(X_test)
 ```
 
-In addition, (HUGGING FACE)[https://huggingface.co/] provides a open-source package, named `tokenizer`, where you can find many fast state-of-the-art tokenizers for research and production. For example, to implement a pre-trained DistilBERT tokenizer and model/transformer, you just need two-line codes as follows
+In addition, [HUGGING FACE](https://huggingface.co/) provides a open-source package, named `tokenizer`, where you can find many fast state-of-the-art tokenizers for research and production. For example, to implement a pre-trained DistilBERT tokenizer and model/transformer, you just need two-line codes as follows
 
 ```python
 import transformers as ppb
@@ -161,7 +161,9 @@ print('best parameters: ', grid_search.best_params_)
 print('best scrores: ', grid_search.best_score_)
 ```
 
-We train and evaluate the model by
+We train and evaluate the model by the prediction accuracy. 
+**Note** the official metric for this competion is [ROC-AUC](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/overview/evaluation), which is more reasonable for a highly unbalanced dataset.
+
 ```python
 ## training
 model_lr.fit(X_train_fitted, y_train)
