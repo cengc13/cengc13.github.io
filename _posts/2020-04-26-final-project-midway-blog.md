@@ -33,7 +33,7 @@ This blog is the second of the three blogs documenting my entry into [toxic comm
 
 ## <a href="#part-1-baseline-model" name="part-1-baseline-model">Part 1: The Baseline Model </a>
 
-Our goal is to take as input a comment text, and produces either 1(the comment is toxic) or 0 (the comment is non-toxic). It is basically a binary classification problem. The simplest model we can think of is the logistic regression model, for which we need to figure out how to digitalize comments so that we can use logistic regression to predict the probabilities of a comment being toxic. Next we will do a quick overview of the dataset, introduce the concepts of tokenizer, and go over the architecture of a baseline model.
+Our goal is to take a comment text as input, and produces either 1(the comment is toxic) or 0 (the comment is non-toxic). It is basically a binary classification problem. The simplest model we can think of is the logistic regression model, for which we need to figure out how to digitalize comments so that we can use logistic regression to predict the probabilities of a comment being toxic. Next we will do a quick overview of the dataset, introduce the concepts of tokenizer, and go over the architecture of a baseline model.
 
 ### Dataset: Jigsaw Multilingual Comments
 
@@ -175,3 +175,86 @@ Dive right into the [notebook](https://github.com/cengc13/2040FinalProject/blob/
 
 ## <a href="#part-2-multilingual-models" name="part-2-multilingual-models">Part 2: Cross-lingual Models </a>
 
+### BERT
+
+**BERT**, which stands for **B**idirectional **E**ncoder **R**epresentations from **T**ransformers, have achieved great success in Natural Language Processing. In contrast with previouis langudage models looking at a text sequence from left to right, the innovation of BERT lies in that it is designed to train bidirectional representation by jointly conditioning on both the left and right context. The following figure shows a high-level description of the BERT architecture. It is essentially a stack of Transformer encoders. The input is a 'sentence' which is tokenized and word-embedded with a 30,000 token vocabulary. The output is a sequence of vectors, for which each vector represents an iput token with the same index.
+
+
+<div class="img-div" markdown="0" style="text-align:center">
+  <image src="/images/midway-blog/BERT_MLM.png"/>
+  <br />
+  <figcaption>MLM illustrated. Source:[MLM](https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270)</figcaption>
+</div>
+
+It is natural that a language model typically looks at part of the sentence and predict the next words. However, it is challenging to define prediction tasks when we look at the sentence bidirectionally. 
+
+The authors of the [original paper](https://arxiv.org/pdf/1810.04805.pdf) uses two pretraining techniques to overcome this issue. They are both unsupervised approaches, namely masked language modeling (MLM) and next sentence prediction (NSP). 
+
+#### Masked LM
+
+15% of the words in a sentence are masked with a [MASK] token. Then the model tries to predict the original tokens in the masked positions. In practice, BERT implemented a more statistically mask scheme. For more details, please refer to the [Appendix C](https://arxiv.org/pdf/1810.04805.pdf)
+
+#### Next Sentence Prediction (NSP)
+
+In BERT, the model can take two sentences as input, and learnd to predict if the second sentence of the pari sentences is the subsequent or antecedent. During pretraing, for 50% of the pair sentences, the second sentence is the actual next sentence, whereas for the rest 50%, the second sentence is randomly chosen, which is supposed to be disconnected from the first sentence.
+
+The pretraining is conducted on documents from BooksCorpus and English Wikipedia. In this scenario, a document-level corpus is used to extract long sequences.
+
+#### Fine tuning 
+
+The fine tuning process refers to using the pretrained BERT to do a downstream task. The process is straightforward and task specific. The architecture is the same except the output layers. Although during fine-tuning, all parameters are fine-tuned, it turns out that most parameters will stay the same.
+
+<div class="img-div" markdown="0" style="text-align:center">
+  <image src="/images/midway-blog/BERT.png"/>
+  <br />
+  <figcaption>Overall pre-training and fine-tuning procedures for BERT</figcaption>
+</div>
+
+
+In order to get a in-depth understanding of this technique, we highly recommend reading the  [paper](https://arxiv.org/pdf/1810.04805.pdf), or the [open source code](https://github.com/google-research/bert) by Google research.
+
+### XLM
+
+Though BERT is trained on over 100 languages, it was not optimized for multilingual models since most of its vocabulary does not commute between languages, and as a result, the knowledge shared is limited. To overcome this issue, instead of using word or characters as input, XLM uses Byte-Pair Encoding (BPE) that splits the input into the most common sub-words across all languages (see [BPE wiki page](https://en.wikipedia.org/wiki/Byte_pair_encoding) for more details about this data compression technique). 
+
+Intrinsically XLM is a updated BERT techniques. It updates BERT architecture in two ways.
+
+- Each training sample consists of the same text in two languages. To predict a masked word in one language, the model can either attend to surrounding words in the same language or the other language. In this way, alignment between contexts of the two languages can be facilitated. 
+
+-  The model also uses language IDs and the order of the tokens in the format of positional embeddings to better understand the relationship of related tokens in various languages.
+
+This new approach is named as Translation Language Modeling (TLM). The model pretraining is carried out as the following schematic representation.  
+<div class="img-div" markdown="0" style="text-align:center">
+  <image src="/images/midway-blog/XLM.png"/>
+  <br />
+  <figcaption>Cross-lingual language model pretraining. Source:[XLM](https://arxiv.org/pdf/1901.07291.pdf)</figcaption>
+</div>
+
+The model is trained by using MLM, TLM or a combination of both. 
+
+
+### XLM-RoBERTa
+
+Similar to XLM, XLM-RoBERTa is also a transformer-based architecture, both relied on MLM and are capable of processing texts across 100 languages. However, the bigges update is that the new architecture is trained on way more data than the original one, i.e. 2.5 TB storage. And the 'RoBERTa' comes from that the training is the same as the monolingual RoBERTa model, for which the sole objective is the MLM, without NSP and TLM. COnsidering the diffuculties of using various tokenization tools for different languages, Sentence Piece model is trained at the first step and then it is applied to all languages. The XLM-RoBERTa model has demonstrated to be superior than the state-of-the-art multilingual models such as GermEval18.
+
+
+## References
+
+- T. Kudo and J. Richardson. SentencePiece: A simple and language independent subword tokenizer and detokenizer for Neural Text Processing. 2018
+
+- Alexis Conneau and Kartikay Khandelwal et.al. Unsupervised Cross-lingual Representation Learning at Scale. 2020
+
+- Guillaume Lample and Alexis Conneau. Cross-lingual Language Model Pretraining. 2019
+
+- Jacob Devlin, Ming-Wei Chang, Kenton Lee and Kristina Toutanova. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. 2019
+
+
+## Next steps
+
+Currently the best model for this Kaggle competition is given by the XLM-R model, which gives us a public leaderboard score of 0.9401. In the following two weeks, we will investigate several strategies to futher improve our model performance. Some intutive approaches that come to my mind are
+
+-  Hyperparameter tuning, such the max length of the tokenized sentence.
+
+-  Ensemble method
+
+-  Metric learning
