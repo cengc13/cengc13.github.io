@@ -120,8 +120,7 @@ For the purpose of demonstration, in the baseline model, we will use a classic t
 ```python
 ### Define the vectorizer
 from sklearn.feature_extraction.text import TfidfVectorizer
-tfidf_vectorizer = TfidfVectorizer(max_features=2000, min_df=2,
-								   max_df=0.95)
+tfidf_vectorizer = TfidfVectorizer(max_features=2000, min_df=2, max_df=0.95)
 ### Suppose X_train is a corpus of texts
 ## Fit the vectorizer
 X_train_fitted = tfidf_vectorizer.fit_transform(X_train)
