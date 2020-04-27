@@ -183,7 +183,8 @@ Dive right into the [notebook](https://github.com/cengc13/2040FinalProject/blob/
 <div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/midway-blog/BERT_MLM.png"/>
   <br />
-  <figcaption>MLM illustrated. Source:[MLM](https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270)</figcaption>
+  <figcaption>MLM illustrated. Source:
+  	<a href="https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270">MLM</a></figcaption>
 </div>
 
 It is natural that a language model typically looks at part of the sentence and predict the next words. However, it is challenging to define prediction tasks when we look at the sentence bidirectionally. 
@@ -227,7 +228,7 @@ This new approach is named as Translation Language Modeling (TLM). The model pre
 <div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/midway-blog/XLM.png"/>
   <br />
-  <figcaption>Cross-lingual language model pretraining. Source:[XLM](https://arxiv.org/pdf/1901.07291.pdf)</figcaption>
+  <figcaption>Cross-lingual language model pretraining. Source:<a href="https://arxiv.org/pdf/1901.07291.pdf">XLM</a></figcaption>
 </div>
 
 The model is trained by using MLM, TLM or a combination of both. 
@@ -237,6 +238,8 @@ The model is trained by using MLM, TLM or a combination of both.
 
 Similar to XLM, XLM-RoBERTa is also a transformer-based architecture, both relied on MLM and are capable of processing texts across 100 languages. However, the bigges update is that the new architecture is trained on way more data than the original one, i.e. 2.5 TB storage. And the 'RoBERTa' comes from that the training is the same as the monolingual RoBERTa model, for which the sole objective is the MLM, without NSP and TLM. COnsidering the diffuculties of using various tokenization tools for different languages, Sentence Piece model is trained at the first step and then it is applied to all languages. The XLM-RoBERTa model has demonstrated to be superior than the state-of-the-art multilingual models such as GermEval18.
 
+
+**Note** that all the pretrained models mentioned above can be easily called by using Huggingface packages. A clear example is given by Jay Alammer (see [here](https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb))
 
 ## References
 
