@@ -161,7 +161,7 @@ print('best scrores: ', grid_search.best_score_)
 ```
 
 We train and evaluate the model by the prediction accuracy. 
-**Note** the official metric for this competion is [ROC-AUC](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/overview/evaluation), which is more reasonable for a highly unbalanced dataset.
+**Note** the official metric for this competition is [ROC-AUC](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/overview/evaluation), which is more reasonable for a highly unbalanced dataset.
 
 ```python
 ## training
@@ -170,13 +170,15 @@ model_lr.fit(X_train_fitted, y_train)
 model_lr.score(X_test_fitted, y_test)
 ```
 
-Dive right into the [notebook](https://github.com/cengc13/2040FinalProject/blob/master/src/models/logistic_regression.ipynb) or [running it on colab](hhttps://colab.research.google.com/drive/1bVBPSKS0JGhOUUaj1yiNmDYRwnFxNsYS). 
+Dive right into the [notebook](https://github.com/cengc13/2040FinalProject/blob/master/src/models/logistic_regression.ipynb) or [running it on colab](https://colab.research.google.com/drive/1bVBPSKS0JGhOUUaj1yiNmDYRwnFxNsYS). 
+
+Note that Tfi-df tokenization is not fully capable of dealing with multiple languages. Instead we should refer to other tokenizers, for example a BERT tokenizer. The example using `bert-base-uncase` model and tokenizer can be found in this [notebook](https://colab.research.google.com/drive/1Pesk5LFMvDXQR0EqRzVRPIBBPNqNSEbT#scrollTo=8BSCrjLN2WSX).
 
 ## <a href="#part-2-multilingual-models" name="part-2-multilingual-models">Part 2: Cross-lingual Models </a>
 
 ### BERT
 
-**BERT**, which stands for **B**idirectional **E**ncoder **R**epresentations from **T**ransformers, have achieved great success in Natural Language Processing. In contrast with previouis langudage models looking at a text sequence from left to right, the innovation of BERT lies in that it is designed to train bidirectional representation by jointly conditioning on both the left and right context. The following figure shows a high-level description of the BERT architecture. It is essentially a stack of Transformer encoders. The input is a 'sentence' which is tokenized and word-embedded with a 30,000 token vocabulary. The output is a sequence of vectors, for which each vector represents an iput token with the same index.
+**BERT**, which stands for **B**idirectional **E**ncoder **R**epresentations from **T**ransformers, have achieved great success in Natural Language Processing. In contrast with previouis langudage models looking at a text sequence from left to right, the innovation of BERT lies in that it is designed to train bidirectional representation by jointly conditioning on both the left and right context. The following figure shows a high-level description of the BERT architecture. It is essentially a stack of Transformer encoders. The input is a 'sentence' which is tokenized and word-embedded with a 30,000 token vocabulary. The output is a sequence of vectors, for which each vector represents an input token with the same index.
 
 
 <div class="img-div" markdown="0" style="text-align:center">
@@ -196,7 +198,7 @@ The authors of the [original paper](https://arxiv.org/pdf/1810.04805.pdf) uses t
 
 #### Next Sentence Prediction (NSP)
 
-In BERT, the model can take two sentences as input, and learnd to predict if the second sentence of the pari sentences is the subsequent or antecedent. During pretraing, for 50% of the pair sentences, the second sentence is the actual next sentence, whereas for the rest 50%, the second sentence is randomly chosen, which is supposed to be disconnected from the first sentence.
+In BERT, the model can take two sentences as input, and learned to predict if the second sentence of the pair sentences is the subsequent or antecedent. During pretraining, for 50% of the pair sentences, the second sentence is the actual next sentence, whereas for the rest 50%, the second sentence is randomly chosen, which is supposed to be disconnected from the first sentence.
 
 The pretraining is conducted on documents from BooksCorpus and English Wikipedia. In this scenario, a document-level corpus is used to extract long sequences.
 
