@@ -69,11 +69,14 @@ A normal transformer usually comprises of an encoder and a decoder. Yet for BERT
 
 <center><img src="http://jalammar.github.io/images/distilBERT/bert-input-to-output-tensor-recap.png" width="800px"> </center>
 
+With the output of the transformer, we can slide the important hidden states for classification.
+ <center><img src="http://jalammar.github.io/images/distilBERT/bert-output-tensor-selection.png" width="800px"> </center>
+
 #### Classifier
 
 In terms of the classifier, since we already put everything in a neural network, it is straightforward to do the same for the classification.
 If we use a dense layer with only one output activated by a `sigmoid` function as the last layer, it is intrinsically a logistic regression classifier. Alternatively, we can add 
-additional dense layers to extract more non-linear features between the output vector of the transformer layer and the final prediction. 
+additional dense layers to extract more non-linear features between the output vector of the transformer layer and the prediction of probability. 
 
 ### Evaluation Metrics
 
@@ -82,7 +85,7 @@ The dataset is highly skewed towards the non-toxic comments. ROC-AUC is taken as
 ### The Code
 
 This section describes the code to train a multilingual model using BERT. 
-The notebook is available on [colab](https://colab.research.google.com/drive/1Pesk5LFMvDXQR0EqRzVRPIBBPNqNSEbT).
+The notebook is available on [colab](https://colab.research.google.com/drive/1Pesk5LFMvDXQR0EqRzVRPIBBPNqNSEbT). The framework of the codes are from [this kernel by xhlulu](https://www.kaggle.com/xhlulu/jigsaw-tpu-xlm-roberta).
 
 Let's start by importing some useful packages
 
@@ -146,6 +149,9 @@ train = pd.read_csv(DATA_FOLDER + '/train.csv')
 valid = pd.read_csv(DATA_FOLDER + '/validation.csv')
 test = pd.read_csv(DATA_FOLDER + '/test.csv')
 sub = pd.read_csv(DATA_FOLDER + '/sample_submission.csv')
+
+# Shuffle the train set
+train = train.sample(frac=1.).reset_index(drop=True)
 ```
 
 Then we define some configurations for tokenization, model architecture and training settings.
@@ -194,10 +200,11 @@ Tokenize the train, validation and test sets in the same manner. Also extract th
 
 ```python
 %%time
+## tokenization
 x_train = fast_encode(train.comment_text.values, fast_tokenizer, maxlen=MAX_LEN)
 x_valid = fast_encode(valid.comment_text.values, fast_tokenizer, maxlen=MAX_LEN)
 x_test = fast_encode(test.content.values, fast_tokenizer, maxlen=MAX_LEN)
-
+## Extract the labels
 y_train = train.toxic.values
 y_valid = valid.toxic.values
 ```
@@ -232,9 +239,11 @@ test_dataset = (
 We then build the BERT model and the model structure is as follows.
 
 ```python
+%%time
 def build_model(transformer, loss='binary_crossentropy', max_len=512):
     input_word_ids = Input(shape=(max_len,), dtype=tf.int32, name="input_word_ids")
     sequence_output = transformer(input_word_ids)[0]
+    # extract the vector for [CLS] token
     cls_token = sequence_output[:, 0, :]
     x = Dropout(0.35)(cls_token)
     out = Dense(1, activation='sigmoid')(x)
@@ -243,6 +252,10 @@ def build_model(transformer, loss='binary_crossentropy', max_len=512):
     model.compile(Adam(lr=1e-5), loss=loss, metrics=[AUC()])
     
     return model
+
+with strategy.scope():
+    transformer_layer = transformers.TFBertModel.from_pretrained(MODEL)
+    model = build_model(transformer_layer, max_len=MAX_LEN)
 ```
 
 <div class="img-div" markdown="0" style="text-align:center">
@@ -250,6 +263,42 @@ def build_model(transformer, loss='binary_crossentropy', max_len=512):
   <br />
   <figcaption>The model structure</figcaption>
 </div>
+
+We pass the `Dataset` object into the model and start training.
+
+```python
+n_steps = x_train.shape[0] // BATCH_SIZE
+train_history = model.fit(
+    train_dataset,
+    steps_per_epoch=n_steps,
+    validation_data=valid_dataset,
+    epochs=EPOCHS
+)
+```
+
+Now that the model is trained. We can visualize the training history using the following function.
+
+```python
+from matplotlib import pyplot as plt
+def plot_loss(his, epoch, title):
+    plt.style.use('ggplot')
+    plt.figure()
+    plt.plot(np.arange(0, epoch), his.history['loss'], label='train_loss')
+
+    plt.plot(np.arange(0, epoch), his.history['val_loss'], label='val_loss')
+
+    plt.title(title)
+    plt.xlabel('Epoch #')
+    plt.ylabel('Loss')
+    plt.legend(loc='upper right')
+    plt.show()
+
+plot_loss(train_history, EPOCHS, "training loss")
+```
+
+<center><img src="http://jalammar.github.io/images/distilBERT/bert-input-to-output-tensor-recap.png" width="800px"> </center>
+
+The training history shows that although there is a bump from Epoch 5 to Epoch 6 for the validation loss, the overall loss for both train and validation decreases gradually.
 
 ## <a href="#model-refinement" name="model-refinement">Model Refinement</a>
 
@@ -264,4 +313,4 @@ def build_model(transformer, loss='binary_crossentropy', max_len=512):
 
 - Jacob Devlin, Ming-Wei Chang, Kenton Lee and Kristina Toutanova. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. 2019
 
-In combination of others' efforts, fortunately I was able to arrive at the 7th place among 800 competition teams. 
+In combination of others' efforts, fortunately I was able to arrive at the a top 5% position among 800 teams.
