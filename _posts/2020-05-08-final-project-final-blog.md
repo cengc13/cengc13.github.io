@@ -296,11 +296,20 @@ def plot_loss(his, epoch, title):
 plot_loss(train_history, EPOCHS, "training loss")
 ```
 
-<center><img src="http://jalammar.github.io/images/distilBERT/bert-input-to-output-tensor-recap.png" width="800px"> </center>
+<center><img src="/images/final-blog/training_loss_history.png" width="800px"> </center>
 
 The training history shows that although there is a bump from Epoch 5 to Epoch 6 for the validation loss, the overall loss for both train and validation decreases gradually.
 
+
+Also, we can look at the distributioin of the prediction probabilities on the validation set. It indicates that if the predicted probability is below 0.3, the comment is more likely to be non-toxic. In contrast, a probability of above 0.6 will predict toxic for the comment. In the probability region between those two, there is some overlap, which means it is challenging to predict the nature of the comment if it falls into this intermediate region.
+
+<center><img src="/images/final-blog/pred_prob.png" width="800px"> </center>
+
 ## <a href="#model-refinement" name="model-refinement">Model Refinement</a>
+
+Next we will discussion various techniques to improve the model performance.
+
+
 
 
 ## References
