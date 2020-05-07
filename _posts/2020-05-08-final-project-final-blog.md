@@ -29,8 +29,8 @@ Honestly this is my first NLP project. I chose a project on Kaggle because the K
 * **[Model Refinement](#model-refinement)**
   * Model Architectures
   * Hyper-parameter Tuning
-  * Ensemble Model
-  * Metric Learning
+  * Data Augmentation
+  * Ensemble Magic
 
 </div>
 
@@ -46,7 +46,7 @@ Our goal is to take a comment text as input, and produces either 1(the comment i
 
 - **Multilingual Issue**: the training set is written in English. The validation is given in three languages, including Turkish, Spanish and Italian. Besides the multilingual validation set, the testing set is written in three more types of languages, i.e. Russian, French and Portuguese. 
 
-We will discuss how we can circumvent or mitigate those three issues. 
+We will discuss how we can circumvent or mitigate those three issues in the second part.
 
 ### Tokenizer, Transformer and Classifier
 
@@ -309,17 +309,47 @@ Also, we can look at the distributioin of the prediction probabilities on the va
 
 Next we will discussion various techniques to improve the model performance.
 
+### Model Architectures
+
+The model architecture is mainly associated with the "Multilingual Issue". Since different architectures are pre-trained on varying size dataset and targeted on different semi-unsupervised tasks, their capability of mining cross-lingual knowledge is different.
+
+The Basic BERT model performs not too bad on this multilingual task, which has a public LB score of around 0.916. As we mentioned in the second blog, the most successful multilingual model is probably the XLM-RoBERTa model, especially the large XLM-R model. The large XLM-R model has more than 500 million parameters, and it demonstrates to be superior to other language models in multilingual modeling. With XLM-R architecture, our baseline LB score goes up to 0.9365, a significant improvement compared to BERT. 
+
+### Hyperparameter Tuning
+
+The hyperparameter tuning aims to the resolve the "Data Size Issue" and "Unbalance Issue". However, we are not able to tune too many hyperparameters due to such a limited time for this final project. 
+Instead, I will elaborate the techniques I tried and the reasoning.
+
+- Adjust the maximum length for the input vector sequence. I tried lengths of 150, 192, 210, and 224. 224 maximum length gives the best LB score of 0.9378. 
+
+- Change the data size of training set. Only a fraction of the training data corresponding to non-toxic comments is selected. It was found that sub-sampling the non-toxic comments help a lot in balancing the dataset. It 
+increases the LB score to 0.9401 with the best maximum length.
+
+- Tweak the loss function. The most typical loss function for a binary classification problem is the `binary_crossentropy` as implemented in `Tensorflow`. Yet, a great work by [Lin et.al](https://arxiv.org/pdf/1708.02002.pdf) proves that using a novel loss they term "Focal Loss" that adds a pre-factor to the standard cross entropy criterion. The name "focal" comes from the fact that the model now pays less attention to the well classified samples while putting more focus on hard, misclassified examples. A weighting factor is also introduced to mitigate the class unbalance issue. The figure below shows why Focal loss focuses more on the misclassified data. Unfortunately, models with focal loss perform similarly compared to the standard binary cross entropy.  
+
+<center><img src="/images/final-blog/focal_loss.png" width="800px"> </center>
+
+- Other random efforts. We add an additional dense layer and a dropout layer right ahead of the final layer. Then the dropout rate and the number of nodes in the dense layer are tuned. Although the model does not improve a lot in terms of the validation accuracy and the LB score, we believe that it will be helpful because adding regularization into a model will increase the generalization capability on unseen data. Moreover, I also tried a learning rate scheduler. However, no significant improvement was observed.
+
+### Data Augmentation
+
+This strategy is of central importance as in the training data we only have English-written comments while in the validation and test set, we have comments written in other languages. Although the multilingual model can capture some of the shared knowledge between various languages, data augmentation is necessary to improve the model performance. As of now, two approaches are tested. 
+
+- Translate the training set to other languages and keep the validation and test set unchanged. This approach gives me a best LB score of 0.9365.
+
+- Translate the validation and test set to English. This model performs a little better, with a LB score of 0.9378.
+
+### Ensemble Magic
+
+I did weighted ensemble on four models. The LB score for individual models are 0.9427, 0.9416, 0.9401 and 0.9365, respectively. By carefully tuning the weights, I arrived at a LB score of 0.9453.
 
 
+In addition, combining my own best submission with public top-score submissions, I am able to achieve a Public LB score of around 0.9467, which leads to a top 5% position out of 800 teams.
 
-## References
+<center><img src="/images/final-blog/pub_lb.png" width="800px"> </center>
 
-- T. Kudo and J. Richardson. SentencePiece: A simple and language independent subword tokenizer and detokenizer for Neural Text Processing. 2018
+### Next steps
 
-- Alexis Conneau and Kartikay Khandelwal et.al. Unsupervised Cross-lingual Representation Learning at Scale. 2020
+- Metric learning: post process the prediction to further improve the model performance
 
-- Guillaume Lample and Alexis Conneau. Cross-lingual Language Model Pretraining. 2019
-
-- Jacob Devlin, Ming-Wei Chang, Kenton Lee and Kristina Toutanova. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. 2019
-
-In combination of others' efforts, fortunately I was able to arrive at the a top 5% position among 800 teams.
+- Transfer learning: using the trained model for other purposes such as predicting the state of a reddit post, which can be mainly categorized as upvote and downvote. 
