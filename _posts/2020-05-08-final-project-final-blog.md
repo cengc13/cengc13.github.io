@@ -325,9 +325,15 @@ Instead, I will elaborate the techniques I tried and the reasoning.
 - Change the data size of training set. Only a fraction of the training data corresponding to non-toxic comments is selected. It was found that sub-sampling the non-toxic comments help a lot in balancing the dataset. It 
 increases the LB score to 0.9401 with the best maximum length.
 
-- Tweak the loss function. The most typical loss function for a binary classification problem is the `binary_crossentropy` as implemented in `Tensorflow`. Yet, a great work by [Lin et.al](https://arxiv.org/pdf/1708.02002.pdf) proves that using a novel loss they term "Focal Loss" that adds a pre-factor to the standard cross entropy criterion. The name "focal" comes from the fact that the model now pays less attention to the well classified samples while putting more focus on hard, misclassified examples. A weighting factor is also introduced to mitigate the class unbalance issue. The figure below shows why Focal loss focuses more on the misclassified data. Unfortunately, models with focal loss perform similarly compared to the standard binary cross entropy.  
+- Tweak the loss function. The most typical loss function for a binary classification problem is the `binary_crossentropy` as implemented in `Tensorflow`. Yet, a great work by [Lin et.al](https://arxiv.org/pdf/1708.02002.pdf) proves that a novel loss they term "Focal Loss" that adds a pre-factor to the standard cross entropy criterion can boost the model accuracy. The name "focal" comes from the fact that the model now pays less attention to the well classified samples while putting more focus on hard, misclassified examples. A weighting factor is also introduced to mitigate the class unbalance issue. The figure below shows why Focal loss focuses more on the misclassified data. Unfortunately, models with focal loss perform similarly compared to the standard binary cross entropy.  
 
-<center><img src="/images/final-blog/focal_loss.png" width="800px"> </center>
+
+<div class="img-div" markdown="0" style="text-align:center">
+  <image src="/images/final-blog/focal_loss.png"/>
+  <br />
+  <figcaption>Focal Loss. Source:
+    <a href="https://arxiv.org/pdf/1708.02002.pdf">focal loss</a></figcaption>
+</div>
 
 - Other random efforts. We add an additional dense layer and a dropout layer right ahead of the final layer. Then the dropout rate and the number of nodes in the dense layer are tuned. Although the model does not improve a lot in terms of the validation accuracy and the LB score, we believe that it will be helpful because adding regularization into a model will increase the generalization capability on unseen data. Moreover, I also tried a learning rate scheduler. However, no significant improvement was observed.
 
@@ -344,7 +350,7 @@ This strategy is of central importance as in the training data we only have Engl
 I did weighted ensemble on four models. The LB score for individual models are 0.9427, 0.9416, 0.9401 and 0.9365, respectively. By carefully tuning the weights, I arrived at a LB score of 0.9453.
 
 
-In addition, combining my own best submission with public top-score submissions, I am able to achieve a Public LB score of around 0.9467, which leads to a top 5% position out of 800 teams.
+In addition, combining my own best submission with public top-score submissions, I am able to achieve a Public LB score of around 0.9476, which leads to a top 5% position out of 800 teams.
 
 <center><img src="/images/final-blog/pub_lb.png" width="800px"> </center>
 
