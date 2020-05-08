@@ -35,6 +35,16 @@ In the first blog, I walk you through an overview of the competition, the explor
 
 </div>
 
+## Acknowledgements
+
+- [EDA and Modeling Kernel](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models) ~ by Tarun Paparaju
+
+- [Illustrative Attention](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/) ~ by Jay Alammer
+
+- [Polyglot](https://pypi.org/project/polyglot/) ~ by aboSamoor
+
+- [Github blog template](https://github.com/barryclark/jekyll-now) ~ by Barry Clark
+
 ## <a href="#part-1-introduction-and-background" name="part-1-introduction-and-background">Part 1: Introduction </a>
 
 ### Background & Motivation
@@ -150,7 +160,7 @@ We can do a few data preprocessing steps before feeding the data into a language
 
 ### EDA
 
-**Note that** the analysis for wordcloud is adapted from this kernel [EDA and Modeling Kernel](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models). 
+**Note that** the analysis for "wordcloud" is adapted from this kernel [EDA and Modeling Kernel](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models). 
 
 #### Comment Wordcloud
 First we take an overview of the comments in the training set. 
@@ -193,7 +203,7 @@ Most comments are composed of one to three sentences.
 
 #### Balance of training set
 
-This bar plot indicates that the balance of the dataset is about 90%. 
+This bar plot indicates that the balance of the dataset is about 90%. The dataset is hence highly unbalanced.
 
 <div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/starter-blog/balance.png"/>
@@ -239,13 +249,3 @@ At a high level of abstraction, an attention model differs in two main ways. Fir
 
 We will discuss some of the start-of-the-art multilingual models, develop the baseline model using the simplest logistic regression and brainstorm possible methods to improve our model importance.
 
-
-## Acknowledgements
-
-- [EDA and Modeling Kernel](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models) ~ by Tarun Paparaju
-
-- [Illustrative Attention](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/) ~ by Jay Alammer
-
-- [Polyglot](https://pypi.org/project/polyglot/) ~ by aboSamoor
-
-- [Github blog template](https://github.com/barryclark/jekyll-now) ~ by Barry Clark

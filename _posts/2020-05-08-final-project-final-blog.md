@@ -4,9 +4,9 @@ published: True
 title: Jigsaw Multilingual Toxic Comment Classification-Final Blog
 ---
 
-This blog is the last of the three blogs documenting my entry into [toxic comment classification kaggle competition](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification). In the [first blog](https://cengc13.github.io/final-project-start-blog/), we introduced the dataset, the EDA analysis and some fundamental knowledge about a language model. In the [second blog](https://cengc13.github.io/final-project-midway-blog/), the simplest logistic regression model is used to illustrate the essential components of a language model, including the tokenizer, model architecture and evaluation metrics. A [mutlilangual classification model](https://colab.research.google.com/drive/1Pesk5LFMvDXQR0EqRzVRPIBBPNqNSEbT#scrollTo=8BSCrjLN2WSX) using BERT architecture is also developed. In addition, we go over state-of-the-art multilingual models, including BERT, XLM and XLM-RoBERTa. The novel techniques in each type of architecture are detailed and compared. 
+This blog is the last of the three blogs documenting my entry into [toxic comment classification kaggle competition](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification). In the [first blog](https://cengc13.github.io/final-project-start-blog/), we introduced the dataset, the EDA analysis and some fundamental knowledge about a language model. In the [second blog](https://cengc13.github.io/final-project-midway-blog/), the simplest logistic regression model is taken as an example to illustrate the essential components of a language model. A [multilingual classification model](https://colab.research.google.com/drive/1Pesk5LFMvDXQR0EqRzVRPIBBPNqNSEbT#scrollTo=8BSCrjLN2WSX) using BERT architecture is also developed. In addition, we went over state-of-the-art multilingual models, including BERT, XLM and XLM-RoBERTa. The novel techniques in each type of architecture are elaborated and compared. 
 
-This final blog summarizes relevant techniques I employed to improving the model performance, which is evaluated by the [public leaderboard score](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/leaderboard) on Kaggle. I will start with the basic BERT multilangual model, after which I will illustrate how we can improve the model step by step based off the basic model.
+This blog summarizes relevant techniques employed to improving the model performance, which is evaluated by the [public leaderboard score](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/leaderboard) on Kaggle. I will start with the basic BERT multilingual model, after which I will illustrate how we can improve the model by tackling the three main challenges for this competition.
 
 Honestly this is my first NLP project. I chose a project on Kaggle because the Kaggle community is an awesome place to share and learn machine learning knowledge. I would like to thank all those great participants on Kaggle, who make this learning process so rewarding and enjoyable.
 
@@ -38,7 +38,7 @@ Honestly this is my first NLP project. I chose a project on Kaggle because the K
 
 ### The Objective
 
-Our goal is to take a comment text as input, and produces either 1(the comment is toxic) or 0 (the comment is non-toxic). It is basically a binary classification problem. There are three significant challenges regarding the dataset that one needs to take care of. 
+Our goal is to take a comment text as input, and produces either 1(the comment is toxic) or 0 (the comment is non-toxic). It is basically a binary classification problem. There are three significant challenges regarding this competition that one needs to take care of. 
 
 - **Data Size Issue**: the training dataset consists of more than 200,000 data, which thus requires a huge amount of time to clean and pre-process the data. In addition, training on regular GPUs might not be able to give us a decent model in a limited time. For example ,the commit time should be less than three hours on Kaggle, which is almost impossible for a typical multilingual model of 100 million parameters to converge on such a large size dataset.
 
@@ -46,11 +46,13 @@ Our goal is to take a comment text as input, and produces either 1(the comment i
 
 - **Multilingual Issue**: the training set is written in English. The validation is given in three languages, including Turkish, Spanish and Italian. Besides the multilingual validation set, the testing set is written in three more types of languages, i.e. Russian, French and Portuguese. 
 
-We will discuss how we can circumvent or mitigate those three issues in the second part.
+We will discuss how we can circumvent or mitigate those three issues in the  model refinement part.
 
 ### Tokenizer, Transformer and Classifier
 
-For the purpose of demonstration of a multilingual model, we  will use the BERT tokenizer and transformer as implemented in the [HuggingFace package](https://huggingface.co/). In the following we use the example illustrated in Jay's [awesome blog](http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/) to show how we encode a comment text, pass it through the model and do the classification in the end. Figures in this section are all from the blog.
+Simply for demonstration of a multilingual model, we  will use the BERT tokenizer and transformer as implemented in the [HuggingFace package](https://huggingface.co/). In the following we use the example illustrated in Jay's [awesome blog](http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/) to show how we encode a comment text, pass it through the model and finally do the classification.
+
+**Note**: figures in this subsection are all from the blog.
 
 #### Tokenizer
 
@@ -80,7 +82,7 @@ additional dense layers to extract more non-linear features between the output v
 
 ### Evaluation Metrics
 
-The dataset is highly skewed towards the non-toxic comments. ROC-AUC is taken as the evaluation metric to represent the extent to which the comments are misclassified. Intuitively, the higher the AUC value, the less overlap the prediction for the two classes will be.
+The dataset is highly skewed towards the non-toxic comments. ROC-AUC is taken as the evaluation metric to represent the extent to which the comments are misclassified. Intuitively, the higher the AUC value, the less overlap the prediction for the two classes will be. In light of this characteristic of AUC metric, further separating the two classes distribution or reduce the variance of the prediction will be helpful to increase the AUC.
 
 ### The Code
 
@@ -350,12 +352,12 @@ This strategy is of central importance as in the training data we only have Engl
 I did weighted ensemble on four models. The LB score for individual models are 0.9427, 0.9416, 0.9401 and 0.9365, respectively. By carefully tuning the weights, I arrived at a LB score of 0.9453.
 
 
-In addition, combining my own best submission with public top-score submissions, I am able to achieve a Public LB score of around 0.9476, which leads to a top 5% position out of 800 teams.
+Further combining my own best submission with public top-score submissions, I am able to achieve a Public LB score of 0.9476, which leads to a top 5% position out of more than 800 teams. The following snapshot for the Public ranking is taken on May 6th.
 
 <center><img src="/images/final-blog/pub_lb.png" width="800px"> </center>
 
 ### Next steps
 
-- Metric learning: post process the prediction to further improve the model performance
+- Metric learning: post process the prediction to further improve the ranking on public leaderboard.
 
-- Transfer learning: using the trained model for other purposes such as predicting the state of a reddit post, which can be mainly categorized as upvote and downvote. 
+- Transfer learning: using the trained model for other purposes such as predicting the state of a reddit post, which can be mainly categorized as upvote and downvote.
