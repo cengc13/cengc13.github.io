@@ -71,7 +71,7 @@ A normal transformer usually comprises of an encoder and a decoder. Yet for BERT
 
 <center><img src="http://jalammar.github.io/images/distilBERT/bert-input-to-output-tensor-recap.png" width="800px"> </center>
 
-With the output of the transformer, we can slide the important hidden states for classification.
+With the output of the transformer, we can slice the important hidden states for classification.
  <center><img src="http://jalammar.github.io/images/distilBERT/bert-output-tensor-selection.png" width="800px"> </center>
 
 #### Classifier
