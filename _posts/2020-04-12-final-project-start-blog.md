@@ -229,16 +229,16 @@ At a high level of abstraction, an attention model differs in two main ways. Fir
 
 ## Citations and References
 
-- Tarun Paparaju. (2020, March). *Jigsaw Multilingual Toxicity : EDA + Models*. Retrieved from https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models  
+- Tarun Paparaju. (2020, March). *Jigsaw Multilingual Toxicity : EDA + Models*. Retrieved from [https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models)  
 
-- Jay Alammer. (2018, May 9). *JVisualizing A Neural Machine Translation Model*. Retrieved from https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/
+- Jay Alammer. (2018, May 9). *JVisualizing A Neural Machine Translation Model*. Retrieved from [https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models)
 
-- Barry Clark. (2016, March). *Build a Jekyll blog in minutes, without touching the command line*. Retrieved from https://github.com/barryclark/jekyll-now
+- Barry Clark. (2016, March). *Build a Jekyll blog in minutes, without touching the command line*. Retrieved from [https://github.com/barryclark/jekyll-now](https://github.com/barryclark/jekyll-now)
 
--  Jason Brownlee. (2017, October 11). *What Are Word Embeddings for Text?* Retrieved from https://machinelearningmastery.com/what-are-word-embeddings/
+-  Jason Brownlee. (2017, October 11). *What Are Word Embeddings for Text?* Retrieved from [https://machinelearningmastery.com/what-are-word-embeddings/](https://machinelearningmastery.com/what-are-word-embeddings/)
 
-- Mohammed Terry-Jack. (2019, April 21). *NLP: Everything about Embeddings*. Retrieved from https://medium.com/@b.terryjack/nlp-everything-about-word-embeddings-9ea21f51ccfe
+- Mohammed Terry-Jack. (2019, April 21). *NLP: Everything about Embeddings*. Retrieved from [https://medium.com/@b.terryjack/nlp-everything-about-word-embeddings-9ea21f51ccfe](https://medium.com/@b.terryjack/nlp-everything-about-word-embeddings-9ea21f51ccfe)
 
-- Anusha Lihala. (2019, March 29). *Attention and its Different Forms*. Retrieved from https://towardsdatascience.com/attention-and-its-different-forms-7fc3674d14dc
+- Anusha Lihala. (2019, March 29). *Attention and its Different Forms*. Retrieved from [https://towardsdatascience.com/attention-and-its-different-forms-7fc3674d14dc](https://towardsdatascience.com/attention-and-its-different-forms-7fc3674d14dc)
 
-- Sean Robertson. (2017). *NLP FROM SCRATCH: TRANSLATION WITH A SEQUENCE TO SEQUENCE NETWORK AND ATTENTION*. Retrieved from https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html
+- Sean Robertson. (2017). *NLP FROM SCRATCH: TRANSLATION WITH A SEQUENCE TO SEQUENCE NETWORK AND ATTENTION*. Retrieved from [https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html](https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html)
