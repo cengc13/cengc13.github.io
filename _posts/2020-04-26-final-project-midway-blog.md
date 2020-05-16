@@ -8,7 +8,6 @@ This blog is the second of the three blogs documenting my entry into [toxic comm
 
 <center><img src="https://www.topbots.com/wp-content/uploads/2019/02/NLP_feature_image_1600px-1280x640.jpg" width="600px"></center>
 
-
 <!--more-->
 
 <div style="font-size:75%; background-color:#eee; border: 1px solid #bbb; display: table; padding: 7px" markdown="1">
