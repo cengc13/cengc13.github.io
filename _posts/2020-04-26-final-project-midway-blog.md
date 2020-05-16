@@ -260,12 +260,12 @@ Similar to XLM, XLM-RoBERTa is also a transformer-based architecture, both relie
 
 ## Annotated Citations
 
-- T. Kudo and J. Richardson. SentencePiece: A simple and language independent subword tokenizer and detokenizer for Neural Text Processing. 2018
+- T. Kudo and J. Richardson. SentencePiece: A simple and language independent subword tokenizer and detokenizer for Neural Text Processing. 2018. This is a paper discussing various tokenization techniques.
 
-- Alexis Conneau and Kartikay Khandelwal et.al. Unsupervised Cross-lingual Representation Learning at Scale. 2020
+- Alexis Conneau and Kartikay Khandelwal et.al. Unsupervised Cross-lingual Representation Learning at Scale. 2020.The XLM-RoBERTa model originates from this paper.
 
-- Guillaume Lample and Alexis Conneau. Cross-lingual Language Model Pretraining. 2019
+- Guillaume Lample and Alexis Conneau. Cross-lingual Language Model Pretraining. 2019. This paper is the first work using the XLM architecture for language modeling.
 
-- Jacob Devlin, Ming-Wei Chang, Kenton Lee and Kristina Toutanova. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. 2019
+- Jacob Devlin, Ming-Wei Chang, Kenton Lee and Kristina Toutanova. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. 2019. This is the original paper for BERT architecture.
 
-- Jay Alammer. (2019, November 26). *A Visual Guide to Using BERT for the First Time*. Retrieved from [https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb](https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb)
+- Jay Alammer. (2019, November 26). *A Visual Guide to Using BERT for the First Time*. Retrieved from [https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb](https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb). The vivid figures for illustration of key components in a language model are taken from this awesome blog.
