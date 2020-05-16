@@ -389,7 +389,7 @@ Further combining my own best submission with public top-score submissions, I am
 - Transfer learning: using the trained model for other purposes such as predicting the state of a reddit post, which can be mainly categorized as upvote and downvote.
 
 
-## Anotated Citations
+## Annotated Citations
 
 - Jay Alammer. (2019, November 26). *A Visual Guide to Using BERT for the First Time*. Retrieved from [https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb](https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb)
 

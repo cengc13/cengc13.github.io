@@ -194,7 +194,7 @@ Note that Tfi-df tokenization is not capable of dealing with multiple languages.
 
 ### BERT
 
-**BERT**, which stands for **B**idirectional **E**ncoder **R**epresentations from **T**ransformers, have achieved great success in Natural Language Processing. In contrast with previouis langudage models looking at a text sequence from left to right, the innovation of BERT lies in that it is designed to train bidirectional representation by jointly conditioning on both the left and right context. The following figure shows a high-level description of the BERT architecture. It is essentially a stack of Transformer encoders. The input is a 'sentence' which is tokenized and word-embedded with a 30,000 token vocabulary. The output is a sequence of vectors, for which each vector represents an input token with the same index.
+**BERT**, which stands for **B**idirectional **E**ncoder **R**epresentations from **T**ransformers, have achieved great success in Natural Language Processing. In contrast with previous language models looking at a text sequence from left to right, the innovation of BERT lies in that it is designed to train bidirectional representation by jointly conditioning on both the left and right context. The following figure shows a high-level description of the BERT architecture. It is essentially a stack of Transformer encoders. The input is a 'sentence' which is tokenized and word-embedded with a 30,000 token vocabulary. The output is a sequence of vectors, for which each vector represents an input token with the same index.
 
 
 <div class="img-div" markdown="0" style="text-align:center">
@@ -253,12 +253,12 @@ The model is trained by using MLM, TLM or a combination of both.
 
 ### XLM-RoBERTa
 
-Similar to XLM, XLM-RoBERTa is also a transformer-based architecture, both relied on MLM and are capable of processing texts across 100 languages. However, the bigges update is that the new architecture is trained on way more data than the original one, i.e. 2.5 TB storage. And the 'RoBERTa' comes from that the training is the same as the monolingual RoBERTa model, for which the sole objective is the MLM, without NSP and TLM. COnsidering the diffuculties of using various tokenization tools for different languages, Sentence Piece model is trained at the first step and then it is applied to all languages. The XLM-RoBERTa model has demonstrated to be superior than the state-of-the-art multilingual models such as GermEval18.
+Similar to XLM, XLM-RoBERTa is also a transformer-based architecture, both relied on MLM and are capable of processing texts across 100 languages. However, the biggest update is that the new architecture is trained on way more data than the original one, i.e. 2.5 TB storage. And the 'RoBERTa' comes from that the training is the same as the monolingual RoBERTa model, for which the sole objective is the MLM, without NSP and TLM. COnsidering the diffuculties of using various tokenization tools for different languages, Sentence Piece model is trained at the first step and then it is applied to all languages. The XLM-RoBERTa model has demonstrated to be superior than the state-of-the-art multilingual models such as GermEval18.
 
 
 **Note** that all the pretrained models mentioned above can be easily called by using Huggingface packages. 
 
-## Anotated Citations
+## Annotated Citations
 
 - T. Kudo and J. Richardson. SentencePiece: A simple and language independent subword tokenizer and detokenizer for Neural Text Processing. 2018
 
