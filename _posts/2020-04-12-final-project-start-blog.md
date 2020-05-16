@@ -8,7 +8,14 @@ This is the first of three blogs documenting my entry into the [toxic comment cl
 
 In the first blog, I walk you through an overview of the competition, the exploratory data analysis, and  the basics of language models for this project.
 
-<center><img src="https://i.imgur.com/4WNesOq.png" width="400px"></center>
+<!-- <center><img src="https://i.imgur.com/4WNesOq.png" width="400px"></center> -->
+
+<div class="img-div" markdown="0" style="text-align:center">
+  <image src="https://i.imgur.com/4WNesOq.png" width="400px" />
+  <br />
+  <figcaption>Competition Logo. Source:
+    <a href="https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification">Logo</a></figcaption>
+</div>
 
 <!--more-->
 
@@ -35,15 +42,6 @@ In the first blog, I walk you through an overview of the competition, the explor
 
 </div>
 
-## Acknowledgements
-
-- [EDA and Modeling Kernel](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models) ~ by Tarun Paparaju
-
-- [Illustrative Attention](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/) ~ by Jay Alammer
-
-- [Polyglot](https://pypi.org/project/polyglot/) ~ by aboSamoor
-
-- [Github blog template](https://github.com/barryclark/jekyll-now) ~ by Barry Clark
 
 ## <a href="#part-1-introduction-and-background" name="part-1-introduction-and-background">Part 1: Introduction </a>
 
@@ -53,50 +51,47 @@ Thanks to the rapid development of deeping learning techniques and computational
 
  
 ### Description of The Competition
-Taking advantage of Kaggle's TPU support, this competition aims to build multilingual models with English-only training data. The model will be tested on Wikipedia talk page comments in several different languages. It is supported by The Conversation AI team, which is funded by [Jiasaw](https://jigsaw.google.com/)and Google. 
+Taking advantage of Kaggle's TPU support, this competition aims to build multilingual models with English-only training data. The model will be tested on Wikipedia talk page comments in several different languages. It is supported by The Conversation AI team, which is funded by [Jiasaw](https://jigsaw.google.com/) and Google. 
 
 ### Evaluation Metrics and Submission Requirements
 Basically it is a classification problem. The model performance is evaluated by the [area under the ROC curve](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) between the predictions and the observations.
 
-The submission file consists of two columns. The first column indicates the comment `id` and the second one is the probability for the `toxicity` variable. Following is an example submission file.
+The submission file consists of two columns. The first column indicates the comment `id` and the second one is the probability for the `toxicity` variable. Following is a sample submission file.
 
-<html>
-<head>
-<style>
-table, th, td {
-  border: 1px solid black;
-  border-collapse: collapse;
-}
-th, td {
-  padding: 5px;
-}
-th {
-  text-align: left;
-}
-</style>
-</head>
-<body>
-
-<table style="width:50%">
+<table class="features-table">
   <tr>
-    <th>id</th>
-    <th>toxic</th>
+    <th class="mdc-text-light-green-600">
+    id
+    </th>
+    <th class="mdc-text-purple-600">
+    toxic
+    </th>
   </tr>
   <tr>
-    <td>0</td>
-    <td>0.3</td>
+    <td class="mdc-bg-light-green-50" style="text-align:left">
+      0
+    </td>
+    <td class="mdc-bg-purple-50">
+      0.3
+    </td>
   </tr>
   <tr>
-    <td>1</td>
-    <td>0.7</td>
+    <td class="mdc-bg-light-green-50" style="text-align:left">
+      1
+    </td>
+    <td class="mdc-bg-purple-50">
+      0.7
+    </td>
   </tr>
   <tr>
-    <td>2</td>
-    <td>0.9</td>
+    <td class="mdc-bg-light-green-50" style="text-align:left">
+     2
+    </td>
+    <td class="mdc-bg-purple-50">
+      0.9
+    </td>
   </tr>
 </table>
-</body>
-</html>
 
 In addition to the well defined metrics evaluted on the given testing set. We might also want to futher apply the language model to additional applications. For example,
 
@@ -109,27 +104,27 @@ In addition to the well defined metrics evaluted on the given testing set. We mi
 ### Dataset
 Following is the list of the datasets we have for this project. The primary data is the `comment_text` column which contains the text of comment to be classified as toxic or non-toxic (0...1 in the `toxic` column). The trainingset's comments are mostly written in English whereas the validation and testing sets' comments are composed of multiple non-English languages. A detailed explanation of the dataset can be found on the [competition webpage](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/data)
 
-<div class="img-div" markdown="0" style="text-align:center">
+<!-- <div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/starter-blog/datasets.png"/>
   <br />
-</div>
+</div> -->
 
 Below shows the five top rows of the training set, validation set and testing set. There are mainly four columns for all datasets, in which `id` is the identifier, `commen_text` is the text of comment, `lang` is the language of the comment, and `toxic` is whether or not the comment is toxic. In the training set, we can see 5 additional columns which represent the subtypes of toxic comment. Moreover, we do not have the `toxic` column in the testing set.
 
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/train_header.png"/>
+  <image src="/images/starter-blog/train_header.png" width="500px"/>
   <br />
   <figcaption>Top 5 rows of the training set</figcaption>
 </div>
 
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/validation_header.png"/>
+  <image src="/images/starter-blog/validation_header.png" width="500px"/>
   <br />
   <figcaption>Top 5 rows of the validation set</figcaption>
 </div>
 
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/test_header.png"/>
+  <image src="/images/starter-blog/test_header.png" width="500px"/>
   <br />
   <figcaption>Top 5 rows the testing set</figcaption>
 </div>
@@ -147,6 +142,7 @@ As mentioned before, most comments in the training set are in English while most
   <br />
   <figcaption>Number of langugaes in the test set</figcaption>
 </div>
+
 
 
 ### Preprocessing
@@ -247,5 +243,14 @@ At a high level of abstraction, an attention model differs in two main ways. Fir
 
 ## Next Steps
 
-We will discuss some of the start-of-the-art multilingual models, develop the baseline model using the simplest logistic regression and brainstorm possible methods to improve our model importance.
+We will discuss some of the start-of-the-art multilingual models, and develop the baseline model using the simplest logistic regression.
 
+## Acknowledgements
+
+- [EDA and Modeling Kernel](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models) ~ by Tarun Paparaju
+
+- [Illustrative Attention](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/) ~ by Jay Alammer
+
+- [Polyglot](https://pypi.org/project/polyglot/) ~ by aboSamoor
+
+- [Github blog template](https://github.com/barryclark/jekyll-now) ~ by Barry Clark
