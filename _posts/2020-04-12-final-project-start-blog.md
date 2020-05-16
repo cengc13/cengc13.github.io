@@ -134,18 +134,18 @@ Below shows the five top rows of the training set, validation set and testing se
 As mentioned before, most comments in the training set are in English while most comments in validation and testing set are in Non-English, including Spanish, French, Turkish and portuguese etc. The number for all types of languages in validation and test set are summarized at below.
 
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/validation_languages.png"/>
+  <image src="/images/starter-blog/validation_languages.png" width="800px"/>
   <br />
-  <figcaption>Number of langugaes in the validation set</figcaption>
+  <figcaption>Language counts in the validation set</figcaption>
 </div>
+
+<br/><br/> 
 
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/test_languages.png"/>
+  <image src="/images/starter-blog/test_languages.png" width="800px"/>
   <br />
-  <figcaption>Number of langugaes in the test set</figcaption>
+  <figcaption>Language counts in the test set</figcaption>
 </div>
-
-
 
 ### Preprocessing
 We can do a few data preprocessing steps before feeding the data into a language model. 
@@ -154,57 +154,60 @@ We can do a few data preprocessing steps before feeding the data into a language
 
 - Remove unnecessary columns in the trainingset such as the subtypes of toxicity because the target for submission is only the `toxic`.
 
-- Tokenize the words, which is also a step of setting up a model.
+- Tokenize the words, which can be also considered as a step for building up a model.
 
 ### EDA
 
-**Note that** the analysis for "wordcloud" is adapted from this kernel [EDA and Modeling Kernel](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models). 
+**Note that** the analysis for "wordcloud" is  inspired by this kernel [EDA and Modeling Kernel](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models). 
 
 #### Comment Wordcloud
-First we take an overview of the comments in the training set. 
+Firstly we take a look at the comments in the training set. 
 
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/comment_wordcloud.png"/>
+  <image src="/images/starter-blog/comment_wordcloud.png" width="800px"/>
   <br />
   <figcaption>Wordclouds of the comment texts</figcaption>
 </div>
 
-We can see that the most common words include "Wikipedia", "article", "will" and "see".
+The most common words include "Wikipedia", "article", "will" and "see". 
 
-We also summarize the common words in the toxic comments in another worldclouds plot. *Disclaimer: The following figure contains text that may be considered profane, vulgar, or offensive.* 
+
+Another plot in the following shows the wordcloud for common words in the toxic comments. 
+
+*Disclaimer: The following figure contains text that may be considered profane, vulgar, or offensive.* 
 
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/toxic_wordcloud.png" />
+  <image src="/images/starter-blog/toxic_wordcloud.png" width="800px"/>
 </div>
 
-More insulting words exist in the toxic comments. 
+As expected, there exist more insulting or hateful words, such as "die" and "pig". 
 
-#### Histogram of # words in the comments  
+#### Histograms of number of words and sentences in all comments  
 
-The figure below shows the distribution of the length of the comment texts. One can see that the distribution if right-skewed and peaked at around a position of $$13$$ words. 
+The figure below shows the distribution for number of words in all comments. One can see that the distribution is right-skewed, and it is peaked at 13 words per comment.
 
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/comment_words.png"/>
+  <image src="/images/starter-blog/comment_words.png" width="800px"/>
   <br />
-  <figcaption>Distribution of number of words in the comments</figcaption>
+  <figcaption>Distribution of number of words in all comments</figcaption>
 </div>
 
-#### Histogram of # sentences in the comments 
+#### Histogram of number of sentences in all comments 
 
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/comment_sentences.png"/>
+  <image src="/images/starter-blog/comment_sentences.png" width="800px"/>
   <br />
-  <figcaption>Distribution of number of sentences in the comments</figcaption>
+  <figcaption>Distribution of number of sentences in all comments</figcaption>
 </div>
 
-Most comments are composed of one to three sentences. 
+The distribution for number of sentences is also right skewed, and 
 
 #### Balance of training set
 
 This bar plot indicates that the balance of the dataset is about 90%. The dataset is hence highly unbalanced.
 
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/balance.png"/>
+  <image src="/images/starter-blog/balance.png" width="800px"/>
   <br />
   <figcaption>Counts of the toxic and non-toxic comments</figcaption>
 </div>
@@ -214,21 +217,10 @@ This bar plot indicates that the balance of the dataset is about 90%. The datase
 ### What is a Language Model?
 A language model is basically a machine learning model that looks at part of a sentence and is able to predict the next one, such as next word recommendation for cellphone keyboard typing. 
 
-<div class="img-div" markdown="0" style="text-align:center">
-  <image src="http://jalammar.github.io/images/word2vec/swiftkey-keyboard.png"/>
-  <br />
-</div>
-
 Statistically, a language model is a probability distribution over sequence of words. Most language models rely on the basic assumption that the probability of a word only depends on the previous *n* words, which is known as the *n*-gram model. Langugae models are useful in many scenarios such speech recognition, parsing and information retrieval. Please refer to the [wiki  page](https://en.wikipedia.org/wiki/Language_model) for more information. 
 
 ### Word Embeddings
-Word embedding is a type of word respresentation that allows words with similar meaning to have a similar representation. It is a groundbreaking progress for developing high-performance deep learning models for NLP. The intuitive approach to word representation is the **one-hot** encoding. To represent each word, we create a zero vector with length equal to the vocabulary. Then one is placed in the index that corresponds to the word. In that sense, we will create a sparse vector. An alternative approach is to encode each word with a unique number so that the resulting vector is short and dense. However, the way how each word is encoded is arbitrary, and we do not know the relationship between the words. Here comes the technique of **word embeddings**. In this scenario, we do not have to specify the encoding by hand. Instead of manually defining the embedding vector, the values of the vector are trained in the same way a model learns weights of a dense layer. A high-dimensional embedding can capture fine relationships between words. More articles about word embedding can be found in the following readings.
-
-- [What are word embeddings?](https://machinelearningmastery.com/what-are-word-embeddings/)
-
-- [Word Embeddings with Tensorflow](https://www.tensorflow.org/tutorials/text/word_embeddings)
-
-- [NLP: Everything about Embeddings](https://medium.com/@b.terryjack/nlp-everything-about-word-embeddings-9ea21f51ccfe)
+Word embedding is a type of word respresentation that allows words with similar meaning to have a similar representation. It is a groundbreaking progress for developing high-performance deep learning models for NLP. The intuitive approach to word representation is the **one-hot** encoding. To represent each word, we create a zero vector with length equal to the vocabulary. Then one is placed in the index that corresponds to the word. In that sense, we will create a sparse vector. An alternative approach is to encode each word with a unique number so that the resulting vector is short and dense. However, the way how each word is encoded is arbitrary, and we do not know the relationship between the words. Here comes the technique of **word embeddings**. In this scenario, we do not have to specify the encoding by hand. Instead of manually defining the embedding vector, the values of the vector are trained in the same way a model learns weights of a dense layer. A high-dimensional embedding can capture fine relationships between words. 
 
 ### Attention
 
@@ -237,22 +229,26 @@ The key idea of Attention is to focus on the most relevant parts of the input se
 For a typical language model, it is composed of an encoder and a decoder.
 The encoder processes each item in the input sequence, and then compile the transformed information into a vector. After processing the entire input sequence, the encoder send the context to the decoder for the next step. Both the encoder and decoder are intrinsically recurrent nueral networks (RNN) which processes the input vector and previous hidden state, and produces the next-step hidden state and output at that time step. 
 
-At a high level of abstraction, an attention model differs in two main ways. Firstly, instead of passing only the last hidden state at the encoder side, the attention model holds all the hidden states and passes all hidden state to the decoder. Secondly, in the decoder side it does one more step before calculating its output. The basic idea is that each hidden state produced at the encoder side is associated with a certain word in the input sequence, thus we can assign a score to each hidden state and use that to amplify the word with high score and drown out words with low scores. A illustrative and comprehensive tutorial of an attention model can be found in the blog [visualizing a neural machine translation model](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/). Other useful resources are:
+At a high level of abstraction, an attention model differs in two main ways. Firstly, instead of passing only the last hidden state at the encoder side, the attention model holds all the hidden states and passes all hidden state to the decoder. Secondly, in the decoder side it does one more step before calculating its output. The basic idea is that each hidden state produced at the encoder side is associated with a certain word in the input sequence, thus we can assign a score to each hidden state and use that to amplify the word with high score and drown out words with low scores. A illustrative and comprehensive tutorial of an attention model can be found in the blog [visualizing a neural machine translation model](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/). 
 
-- [Attention and its Different Forms](https://towardsdatascience.com/attention-and-its-different-forms-7fc3674d14dc)
-
-- [NLP FROM SCRATCH: TRANSLATION WITH A SEQUENCE TO SEQUENCE NETWORK AND ATTENTION](https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html)
-
-## Next Steps
-
-We will discuss some of the start-of-the-art multilingual models, and develop the baseline model using the simplest logistic regression.
-
-## Acknowledgements
+## Citations and References
 
 - [EDA and Modeling Kernel](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models) ~ by Tarun Paparaju
 
 - [Illustrative Attention](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/) ~ by Jay Alammer
 
-- [Polyglot](https://pypi.org/project/polyglot/) ~ by aboSamoor
-
 - [Github blog template](https://github.com/barryclark/jekyll-now) ~ by Barry Clark
+
+More articles about word embedding can be found in the following readings:
+
+- [What are word embeddings?](https://machinelearningmastery.com/what-are-word-embeddings/)
+
+- [Word Embeddings with Tensorflow](https://www.tensorflow.org/tutorials/text/word_embeddings)
+
+- [NLP: Everything about Embeddings](https://medium.com/@b.terryjack/nlp-everything-about-word-embeddings-9ea21f51ccfe)
+
+Other useful resources for understanding attentions:
+
+- [Attention and its Different Forms](https://towardsdatascience.com/attention-and-its-different-forms-7fc3674d14dc)
+
+- [NLP FROM SCRATCH: TRANSLATION WITH A SEQUENCE TO SEQUENCE NETWORK AND ATTENTION](https://pytorch.org/tutorials/intermediate/seq2seq_translation_tutorial.html)

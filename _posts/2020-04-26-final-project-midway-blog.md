@@ -240,7 +240,7 @@ Similar to XLM, XLM-RoBERTa is also a transformer-based architecture, both relie
 
 **Note** that all the pretrained models mentioned above can be easily called by using Huggingface packages. A clear example is given by Jay Alammer (see [here](https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb))
 
-## References
+## Citations and References
 
 - T. Kudo and J. Richardson. SentencePiece: A simple and language independent subword tokenizer and detokenizer for Neural Text Processing. 2018
 
@@ -249,14 +249,3 @@ Similar to XLM, XLM-RoBERTa is also a transformer-based architecture, both relie
 - Guillaume Lample and Alexis Conneau. Cross-lingual Language Model Pretraining. 2019
 
 - Jacob Devlin, Ming-Wei Chang, Kenton Lee and Kristina Toutanova. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. 2019
-
-
-## Next steps
-
-Currently the best model for this Kaggle competition is given by the XLM-R model, which gives us a public leaderboard score of 0.9401. In the following two weeks, we will investigate several strategies to futher improve our model performance. Some intutive approaches that come to my mind are
-
--  Hyperparameter tuning, such the max length of the tokenized sentence.
-
--  Ensemble method
-
--  Metric learning
