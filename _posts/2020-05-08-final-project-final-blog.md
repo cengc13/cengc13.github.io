@@ -13,7 +13,7 @@ Honestly this is my first NLP project. I chose a project on Kaggle because the K
 <div class="img-div" markdown="0" style="text-align:center">
   <image src="https://www.freelancinggig.com/blog/wp-content/uploads/2017/07/Natural-Language-Processing.png" width="600px" />
   <br />
-  <figcaption>Image source:
+  <figcaption>Natural Language Processing. Image source:
     <a href="https://medium.com/voice-tech-podcast/predicting-the-type-of-event-based-on-comments-using-natural-language-processing-dd9c04546159/">Medium</a></figcaption>
 </div>
 
@@ -64,7 +64,7 @@ The first step is to split the words into tokens. Then special tokens are added 
 <div class="img-div" markdown="0" style="text-align:center">
   <image src="http://jalammar.github.io/images/distilBERT/bert-distilbert-tokenization-1.png" width="800px" />
   <br />
-  <figcaption>Image source:
+  <figcaption>Tokenization: step 1 and 2 for a basic BERT model. Image source:
     <a href="http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/">Tokenization step 1 and 2</a></figcaption>
 </div>
 
@@ -73,7 +73,7 @@ Lastly, the tokens are embedded into its id using the embedding model-specific t
 <div class="img-div" markdown="0" style="text-align:center">
   <image src="http://jalammar.github.io/images/distilBERT/bert-distilbert-tokenization-2-token-ids.png" width="800px" />
   <br />
-  <figcaption>Image source:
+  <figcaption>Tokenization: step 3 for a basic BERT model. Image source:
     <a href="http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/">Tokenization step 3</a></figcaption>
 </div>
 
@@ -87,7 +87,7 @@ A normal transformer usually comprises of an encoder and a decoder. Yet for BERT
 <div class="img-div" markdown="0" style="text-align:center">
   <image src="http://jalammar.github.io/images/distilBERT/bert-input-to-output-tensor-recap.png" width="800px" />
   <br />
-  <figcaption>Image source:
+  <figcaption>Recap of the journey of a comment. Image source:
     <a href="http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/">Recap</a></figcaption>
 </div>
 
@@ -96,7 +96,7 @@ With the output of the transformer, we can slice the important hidden states for
 <div class="img-div" markdown="0" style="text-align:center">
   <image src="http://jalammar.github.io/images/distilBERT/bert-output-tensor-selection.png" width="800px" />
   <br />
-  <figcaption>Image source:
+  <figcaption>Slice the important output hidden states for classification. Image source:
     <a href="http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/">Slice the output</a></figcaption>
 </div>
 
@@ -324,14 +324,24 @@ def plot_loss(his, epoch, title):
 plot_loss(train_history, EPOCHS, "training loss")
 ```
 
-<center><img src="/images/final-blog/training_loss_history.png" width="800px"> </center>
+
+<div class="img-div" markdown="0" style="text-align:center">
+  <image src="/images/final-blog/training_loss_history.png" width="800px" />
+  <br />
+  <figcaption>Training history for the training and validation losses. </figcaption>
+</div>
 
 The training history shows that although there is a bump from Epoch 5 to Epoch 6 for the validation loss, the overall loss for both train and validation decreases gradually.
 
 
 Also, we can look at the distributions of the prediction probabilities on the validation set. It indicates that if the predicted probability is below 0.3, the comment is more likely to be non-toxic. In contrast, a probability of above 0.6 will predict toxic for the comment. In the probability region between those two, there is some overlap, which means it is challenging to predict the nature of the comment if it falls into this intermediate region.
 
-<center><img src="/images/final-blog/pred_prob.png" width="800px"> </center>
+<div class="img-div" markdown="0" style="text-align:center">
+  <image src="/images/final-blog/pred_prob.png" width="800px" />
+  <br />
+  <figcaption>Distribution for the predicted probabilities on the validation set. </figcaption>
+</div>
+
 
 ## <a href="#model-refinement" name="model-refinement">Model Refinement</a>
 
@@ -359,7 +369,7 @@ increases the LB score to 0.9401 with the best maximum length.
 <div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/final-blog/focal_loss.png"/>
   <br />
-  <figcaption>Focal Loss. Source:
+  <figcaption>Focal Loss with various gamma values. Source:
     <a href="https://arxiv.org/pdf/1708.02002.pdf">focal loss</a></figcaption>
 </div>
 
@@ -380,7 +390,12 @@ I did weighted ensemble on four models. The LB score for individual models are 0
 
 Further combining my own best submission with public top-score submissions, I am able to achieve a Public LB score of 0.9476, which leads to a top 5% position out of more than 800 teams. The following snapshot for the Public ranking is taken on May 6th.
 
-<center><img src="/images/final-blog/pub_lb.png" width="800px"> </center>
+<div class="img-div" markdown="0" style="text-align:center">
+  <image src="/images/final-blog/pub_lb.png" width="800px" />
+  <br />
+  <figcaption>Snapshot of the public leaderboard, taken on May 6th. </figcaption>
+</div>
+
 
 ### Next steps
 

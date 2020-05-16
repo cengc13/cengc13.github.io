@@ -9,7 +9,7 @@ This blog is the second of the three blogs documenting my entry into [toxic comm
 <div class="img-div" markdown="0" style="text-align:center">
   <image src="https://www.topbots.com/wp-content/uploads/2019/02/NLP_feature_image_1600px-1280x640.jpg" width="600px" />
   <br />
-  <figcaption>Image source:
+  <figcaption>Natural Language Processing. Image source:
     <a href="https://venturebeat.com/2018/09/29/investing-in-ai-when-natural-language-processing-pays-off/">Investing in AI</a></figcaption>
 </div>
 
@@ -117,7 +117,7 @@ A tokenizer works as a pipeline. It processes some raw text as input and output 
 <div class="img-div" markdown="0" style="text-align:center">
   <image src="http://jalammar.github.io/images/distilBERT/bert-distilbert-tokenization-1.png" width="800px" />
   <br />
-  <figcaption>Image source:
+  <figcaption>Tokenization: step 1 and 2 for a basic BERT model. Image source:
     <a href="http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/">Tokenization step 1 and 2</a></figcaption>
 </div>
 
@@ -127,7 +127,7 @@ The final step is to replace each token with its numeric id from the embedding t
 <div class="img-div" markdown="0" style="text-align:center">
   <image src="http://jalammar.github.io/images/distilBERT/bert-distilbert-tokenization-2-token-ids.png" width="800px" />
   <br />
-  <figcaption>Image source:
+  <figcaption>Tokenization: step 3 for a basic BERT model. Image source:
     <a href="http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/">Tokenization step 3</a></figcaption>
 </div>
 
@@ -200,7 +200,7 @@ Note that Tfi-df tokenization is not capable of dealing with multiple languages.
 <div class="img-div" markdown="0" style="text-align:center">
   <image src="/images/midway-blog/BERT_MLM.png" width="800px"/>
   <br />
-  <figcaption>MLM illustrated. Source:
+  <figcaption>Schematic for the Masked Language Modeling in BERT. Source:
   	<a href="https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270">MLM</a></figcaption>
 </div>
 
