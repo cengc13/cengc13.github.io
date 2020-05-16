@@ -10,7 +10,12 @@ This blog summarizes relevant techniques employed to improving the model perform
 
 Honestly this is my first NLP project. I chose a project on Kaggle because the Kaggle community is an awesome place to share and learn machine learning knowledge. I would like to thank all those great participants on Kaggle, who make this learning process so rewarding and enjoyable.
 
-<center><img src="https://www.freelancinggig.com/blog/wp-content/uploads/2017/07/Natural-Language-Processing.png" width="600px"></center>
+<div class="img-div" markdown="0" style="text-align:center">
+  <image src="https://www.freelancinggig.com/blog/wp-content/uploads/2017/07/Natural-Language-Processing.png" width="600px" />
+  <br />
+  <figcaption>Image source:
+    <a href="https://medium.com/voice-tech-podcast/predicting-the-type-of-event-based-on-comments-using-natural-language-processing-dd9c04546159/">Medium</a></figcaption>
+</div>
 
 <!--more-->
 
@@ -52,16 +57,25 @@ We will discuss how we can circumvent or mitigate those three issues in the  mod
 
 Simply for demonstration of a multilingual model, we  will use the BERT tokenizer and transformer as implemented in the [HuggingFace package](https://huggingface.co/). In the following we use the example illustrated in Jay's [awesome blog](http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/) to show how we encode a comment text, pass it through the model and finally do the classification.
 
-**Note**: figures in this subsection are all from the blog.
-
 #### Tokenizer
 
 The first step is to split the words into tokens. Then special tokens are added for the purpose of classification. For example, [CLS] is added as the first position of a comment/review, and [SEP] is added at the end of each sentence. Note that a comment/review may consist of many sentences, therefore we could have many [SEP]s in one comment, but only one [CLS]. 
 
-<center><img src="http://jalammar.github.io/images/distilBERT/bert-distilbert-tokenization-1.png" width="800px"></center>
+<div class="img-div" markdown="0" style="text-align:center">
+  <image src="http://jalammar.github.io/images/distilBERT/bert-distilbert-tokenization-1.png" width="800px" />
+  <br />
+  <figcaption>Image source:
+    <a href="http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/">Tokenization step 1 and 2</a></figcaption>
+</div>
 
 Lastly, the tokens are embedded into its id using the embedding model-specific table component. As we mentioned in the [second blog](https://cengc13.github.io/final-project-midway-blog/), BERT uses word-piece tokenization while XLM uses Byte-Pair Encoding to grasp the most common sub-words across all languages.
-<center><img src="http://jalammar.github.io/images/distilBERT/bert-distilbert-tokenization-2-token-ids.png" width="800px"> </center>
+
+<div class="img-div" markdown="0" style="text-align:center">
+  <image src="http://jalammar.github.io/images/distilBERT/bert-distilbert-tokenization-2-token-ids.png" width="800px" />
+  <br />
+  <figcaption>Image source:
+    <a href="http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/">Tokenization step 3</a></figcaption>
+</div>
 
 Now the input comment is ready to be sent to a language model which  is typically made up of stacks of RNN.
 
@@ -69,10 +83,22 @@ Now the input comment is ready to be sent to a language model which  is typicall
 
 A normal transformer usually comprises of an encoder and a decoder. Yet for BERT, it is made up by stacks of only encoders. When an embedded input sequence passes through the model, the output would be a vector for each input token, which is made up of 768 float numbers for a BERT model. As this is a sentence classification problem, we take out the first vector associated with the [CLS] token, which is also the one we send to the classifier. The illustrative figure in the following recaps the journey of a comment
 
-<center><img src="http://jalammar.github.io/images/distilBERT/bert-input-to-output-tensor-recap.png" width="800px"> </center>
+
+<div class="img-div" markdown="0" style="text-align:center">
+  <image src="http://jalammar.github.io/images/distilBERT/bert-input-to-output-tensor-recap.png" width="800px" />
+  <br />
+  <figcaption>Image source:
+    <a href="http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/">Recap</a></figcaption>
+</div>
+
 
 With the output of the transformer, we can slice the important hidden states for classification.
- <center><img src="http://jalammar.github.io/images/distilBERT/bert-output-tensor-selection.png" width="800px"> </center>
+<div class="img-div" markdown="0" style="text-align:center">
+  <image src="http://jalammar.github.io/images/distilBERT/bert-output-tensor-selection.png" width="800px" />
+  <br />
+  <figcaption>Image source:
+    <a href="http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/">Slice the output</a></figcaption>
+</div>
 
 #### Classifier
 
@@ -361,3 +387,13 @@ Further combining my own best submission with public top-score submissions, I am
 - Metric learning: post process the prediction to further improve the ranking on public leaderboard.
 
 - Transfer learning: using the trained model for other purposes such as predicting the state of a reddit post, which can be mainly categorized as upvote and downvote.
+
+
+## Anotated Citations
+
+- Jay Alammer. (2019, November 26). *A Visual Guide to Using BERT for the First Time*. Retrieved from [https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb](https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb)
+
+- Jacob Devlin, Ming-Wei Chang, Kenton Lee and Kristina Toutanova. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. 2019
+
+- Tsung-Yi Lin et al. Focal Loss for Dense Object Detection. 2017 
+

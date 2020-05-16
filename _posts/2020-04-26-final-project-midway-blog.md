@@ -6,7 +6,13 @@ title: Jigsaw Multilingual Toxic Comment Classification-Midway Blog
 
 This blog is the second of the three blogs documenting my entry into [toxic comment classification kaggle competition](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification). In the [first blog](https://cengc13.github.io/final-project-start-blog/), we introduced the dataset, the EDA analysis and some fundamental knowledge about a language model. To move forward, the primary purpose of the next step is to develop the baseline model from scratch. The link is provided in the [notebook for the model](https://github.com/cengc13/2040FinalProject/blob/master/src/models/logistic_regression.ipynb) or [running it on colab](https://colab.research.google.com/drive/1bVBPSKS0JGhOUUaj1yiNmDYRwnFxNsYS). The essential components of a language model are summarized, including the tokenizer, the model architecture, and the evaluation metrics. In addition, we will cover some state-of-the-art multilingual models, such as BERT, XLM and XLM-RoBERT.
 
-<center><img src="https://www.topbots.com/wp-content/uploads/2019/02/NLP_feature_image_1600px-1280x640.jpg" width="600px"></center>
+<div class="img-div" markdown="0" style="text-align:center">
+  <image src="https://www.topbots.com/wp-content/uploads/2019/02/NLP_feature_image_1600px-1280x640.jpg" width="600px" />
+  <br />
+  <figcaption>Image source:
+    <a href="https://venturebeat.com/2018/09/29/investing-in-ai-when-natural-language-processing-pays-off/">Investing in AI</a></figcaption>
+</div>
+
 
 <!--more-->
 
@@ -107,12 +113,25 @@ y_train, y_test = y_train.astype(int), y_test.astype(int)
 
 A tokenizer works as a pipeline. It processes some raw text as input and output encoding. It is usually structured into three steps. Here we illustrate the idea of tokenization by the example provided in the blog ["A Visual Guide to Using BERT for the First Time"](http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/). For instance, if we would like to classify the sentence "“a visually stunning rumination on love", the tokenizer will firstly split the sentences into words with some separator, say whitespace. In the next step, special tokens will be added for sentence classifications for some tokenizers. 
 
-<center><img src="http://jalammar.github.io/images/distilBERT/bert-distilbert-tokenization-1.png" width="800px"></center>
+
+<div class="img-div" markdown="0" style="text-align:center">
+  <image src="http://jalammar.github.io/images/distilBERT/bert-distilbert-tokenization-1.png" width="800px" />
+  <br />
+  <figcaption>Image source:
+    <a href="http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/">Tokenization step 1 and 2</a></figcaption>
+</div>
 
 
 The final step is to replace each token with its numeric id from the embedding table, which is a natural component of a pre-trained model. Then the sentence is ready to be sent for a language model to be processed.
 
-<center><img src="http://jalammar.github.io/images/distilBERT/bert-distilbert-tokenization-2-token-ids.png" width="800px"></center>
+<div class="img-div" markdown="0" style="text-align:center">
+  <image src="http://jalammar.github.io/images/distilBERT/bert-distilbert-tokenization-2-token-ids.png" width="800px" />
+  <br />
+  <figcaption>Image source:
+    <a href="http://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/">Tokenization step 3</a></figcaption>
+</div>
+
+
 
 For the purpose of demonstration, in the baseline model, we will use a classic tokenization method `TF-IDF`, which is short for "term frequency-inverse document frequency". Basically it counts the number of occurrence of a word in the documents, and then it is offset by the number of documents that contain the word. This tokenization approach is available in the package `sklearn`. 
 
@@ -169,7 +188,7 @@ model_lr.fit(X_train_fitted, y_train)
 model_lr.score(X_test_fitted, y_test)
 ```
 
-Note that Tfi-df tokenization is not capable of dealing with multiple languages. Instead we should refer to other tokenizers, for example a BERT tokenizer. The example using `bert-base-uncase` model and tokenizer can be found in this [notebook](https://colab.research.google.com/drive/1Pesk5LFMvDXQR0EqRzVRPIBBPNqNSEbT#scrollTo=8BSCrjLN2WSX).
+Note that Tfi-df tokenization is not capable of dealing with multiple languages. Instead we should refer to other tokenizers, for example a BERT tokenizer. The example using `bert-base-uncase` model and tokenizer can be found in this [colab notebook](https://colab.research.google.com/drive/1Pesk5LFMvDXQR0EqRzVRPIBBPNqNSEbT#scrollTo=8BSCrjLN2WSX).
 
 ## <a href="#part-2-multilingual-models" name="part-2-multilingual-models">Part 2: Cross-lingual Models </a>
 
@@ -179,7 +198,7 @@ Note that Tfi-df tokenization is not capable of dealing with multiple languages.
 
 
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/midway-blog/BERT_MLM.png"/>
+  <image src="/images/midway-blog/BERT_MLM.png" width="800px"/>
   <br />
   <figcaption>MLM illustrated. Source:
   	<a href="https://towardsdatascience.com/bert-explained-state-of-the-art-language-model-for-nlp-f8b21a9b6270">MLM</a></figcaption>
@@ -204,7 +223,7 @@ The pretraining is conducted on documents from BooksCorpus and English Wikipedia
 The fine tuning process refers to using the pretrained BERT to do a downstream task. The process is straightforward and task specific. The architecture is the same except the output layers. Although during fine-tuning, all parameters are fine-tuned, it turns out that most parameters will stay the same.
 
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/midway-blog/BERT.png"/>
+  <image src="/images/midway-blog/BERT.png" width="800px"/>
   <br />
   <figcaption>Overall pre-training and fine-tuning procedures for BERT. Source:<a href="https://arxiv.org/pdf/1810.04805.pdf">BERT</a> </figcaption>
 </div>
@@ -224,7 +243,7 @@ Intrinsically XLM is a updated BERT techniques. It updates BERT architecture in 
 
 This new approach is named as Translation Language Modeling (TLM). The model pretraining is carried out as the following schematic representation.  
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/midway-blog/XLM.png"/>
+  <image src="/images/midway-blog/XLM.png" width="800px"/>
   <br />
   <figcaption>Cross-lingual language model pretraining. Source:<a href="https://arxiv.org/pdf/1901.07291.pdf">XLM</a></figcaption>
 </div>
@@ -237,9 +256,9 @@ The model is trained by using MLM, TLM or a combination of both.
 Similar to XLM, XLM-RoBERTa is also a transformer-based architecture, both relied on MLM and are capable of processing texts across 100 languages. However, the bigges update is that the new architecture is trained on way more data than the original one, i.e. 2.5 TB storage. And the 'RoBERTa' comes from that the training is the same as the monolingual RoBERTa model, for which the sole objective is the MLM, without NSP and TLM. COnsidering the diffuculties of using various tokenization tools for different languages, Sentence Piece model is trained at the first step and then it is applied to all languages. The XLM-RoBERTa model has demonstrated to be superior than the state-of-the-art multilingual models such as GermEval18.
 
 
-**Note** that all the pretrained models mentioned above can be easily called by using Huggingface packages. A clear example is given by Jay Alammer (see [here](https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb))
+**Note** that all the pretrained models mentioned above can be easily called by using Huggingface packages. 
 
-## Citations and References
+## Anotated Citations
 
 - T. Kudo and J. Richardson. SentencePiece: A simple and language independent subword tokenizer and detokenizer for Neural Text Processing. 2018
 
@@ -248,3 +267,5 @@ Similar to XLM, XLM-RoBERTa is also a transformer-based architecture, both relie
 - Guillaume Lample and Alexis Conneau. Cross-lingual Language Model Pretraining. 2019
 
 - Jacob Devlin, Ming-Wei Chang, Kenton Lee and Kristina Toutanova. BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. 2019
+
+- Jay Alammer. (2019, November 26). *A Visual Guide to Using BERT for the First Time*. Retrieved from [https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb](https://colab.research.google.com/github/jalammar/jalammar.github.io/blob/master/notebooks/bert/A_Visual_Notebook_to_Using_BERT_for_the_First_Time.ipynb)

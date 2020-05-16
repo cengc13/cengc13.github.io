@@ -227,7 +227,7 @@ The encoder processes each item in the input sequence, and then compile the tran
 
 At a high level of abstraction, an attention model differs in two main ways. Firstly, instead of passing only the last hidden state at the encoder side, the attention model holds all the hidden states and passes all hidden state to the decoder. Secondly, in the decoder side it does one more step before calculating its output. The basic idea is that each hidden state produced at the encoder side is associated with a certain word in the input sequence, thus we can assign a score to each hidden state and use that to amplify the word with high score and drown out words with low scores. A illustrative and comprehensive tutorial of an attention model can be found in the blog [visualizing a neural machine translation model](https://jalammar.github.io/visualizing-neural-machine-translation-mechanics-of-seq2seq-models-with-attention/). 
 
-## Citations and References
+## Anotated Citations
 
 - Tarun Paparaju. (2020, March). *Jigsaw Multilingual Toxicity : EDA + Models*. Retrieved from [https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models](https://www.kaggle.com/tarunpaparaju/jigsaw-multilingual-toxicity-eda-models)  
 
