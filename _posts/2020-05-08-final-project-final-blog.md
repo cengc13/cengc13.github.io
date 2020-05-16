@@ -4,7 +4,7 @@ published: True
 title: Jigsaw Multilingual Toxic Comment Classification-Final Blog
 ---
 
-This blog is the last of the three blogs documenting my entry into [toxic comment classification kaggle competition](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification). In the [first blog](https://cengc13.github.io/final-project-start-blog/), we introduced the dataset, the EDA analysis and some fundamental knowledge about a language model. In the [second blog](https://cengc13.github.io/final-project-midway-blog/), the simplest logistic regression model is taken as an example to illustrate the essential components of a language model. A [multilingual classification model](https://colab.research.google.com/drive/1Pesk5LFMvDXQR0EqRzVRPIBBPNqNSEbT#scrollTo=8BSCrjLN2WSX) using BERT architecture is also developed. In addition, we went over state-of-the-art multilingual models, including BERT, XLM and XLM-RoBERTa. The novel techniques in each type of architecture are elaborated and compared. 
+This blog is the last of the three blogs documenting my entry into the [toxic comment classification kaggle competition](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification). In the [first blog](https://cengc13.github.io/final-project-start-blog/), we introduced the dataset, the EDA analysis and some fundamental knowledge about a language model. In the [second blog](https://cengc13.github.io/final-project-midway-blog/), the simplest logistic regression model is taken as an example to illustrate the essential components of a language model. A [multilingual classification model](https://colab.research.google.com/drive/1Pesk5LFMvDXQR0EqRzVRPIBBPNqNSEbT#scrollTo=8BSCrjLN2WSX) using BERT architecture is also developed. In addition, we went over state-of-the-art multilingual models, including BERT, XLM and XLM-RoBERTa. The novel techniques in each type of architecture are elaborated and compared. 
 
 This blog summarizes relevant techniques employed to improving the model performance, which is evaluated by the [public leaderboard score](https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification/leaderboard) on Kaggle. I will start with the basic BERT multilingual model, after which I will illustrate how we can improve the model by tackling the three main challenges for this competition.
 
@@ -43,13 +43,13 @@ Honestly this is my first NLP project. I chose a project on Kaggle because the K
 
 ### The Objective
 
-Our goal is to take a comment text as input, and produces either 1(the comment is toxic) or 0 (the comment is non-toxic). It is basically a binary classification problem. There are three significant challenges regarding this competition that one needs to take care of. 
+Our goal is to take a comment text as input, and produce either 1(the comment is toxic) or 0 (the comment is non-toxic). It is basically a binary classification problem. There are three significant challenges regarding this competition that one needs to take care of. 
 
 - **Data Size Issue**: the training dataset consists of more than 200,000 data, which thus requires a huge amount of time to clean and pre-process the data. In addition, training on regular GPUs might not be able to give us a decent model in a limited time. For example ,the commit time should be less than three hours on Kaggle, which is almost impossible for a typical multilingual model of 100 million parameters to converge on such a large size dataset.
 
-- **Unbalance Issue**: the training and validation set is highly unbalanced with a toxic/nontoxic ratio around 1:9. Therefore, this competition uses the ROC-AUC value as the evaluation metric. In other words, if we train the model based on the unbalanced dataset, the model should predict better on nontoxic comments than toxic ones.
+- **Imbalance Issue**: the training and validation set is highly unbalanced with a toxic/nontoxic ratio around 1:9. Therefore, this competition uses the ROC-AUC value as the evaluation metric. In other words, if we train the model based on the unbalanced dataset, the model should predict better on nontoxic comments than toxic ones.
 
-- **Multilingual Issue**: the training set is written in English. The validation is given in three languages, including Turkish, Spanish and Italian. Besides the multilingual validation set, the testing set is written in three more types of languages, i.e. Russian, French and Portuguese. 
+- **Multilingual Issue**: the training set is written in English. The validation is given in three languages, Turkish, Spanish, and Italian. Besides the multilingual validation set, the testing set is written in three more types of languages, i.e. Russian, French and Portuguese. 
 
 We will discuss how we can circumvent or mitigate those three issues in the  model refinement part.
 
@@ -329,7 +329,7 @@ plot_loss(train_history, EPOCHS, "training loss")
 The training history shows that although there is a bump from Epoch 5 to Epoch 6 for the validation loss, the overall loss for both train and validation decreases gradually.
 
 
-Also, we can look at the distributioin of the prediction probabilities on the validation set. It indicates that if the predicted probability is below 0.3, the comment is more likely to be non-toxic. In contrast, a probability of above 0.6 will predict toxic for the comment. In the probability region between those two, there is some overlap, which means it is challenging to predict the nature of the comment if it falls into this intermediate region.
+Also, we can look at the distributions of the prediction probabilities on the validation set. It indicates that if the predicted probability is below 0.3, the comment is more likely to be non-toxic. In contrast, a probability of above 0.6 will predict toxic for the comment. In the probability region between those two, there is some overlap, which means it is challenging to predict the nature of the comment if it falls into this intermediate region.
 
 <center><img src="/images/final-blog/pred_prob.png" width="800px"> </center>
 
