@@ -14,7 +14,7 @@ In the first blog, I walk you through an overview of the competition, the explor
   <image src="https://i.imgur.com/4WNesOq.png" width="400px" />
   <br />
   <figcaption>Competition Logo. Source:
-    <a href="https://www.kaggle.com/c/jigsaw-multilingual-toxic-comment-classification">Logo</a></figcaption>
+    <a href="https://www.kaggle.com/c/jigsaw-toxic-comment-classification-challenge">Logo</a></figcaption>
 </div>
 
 <!--more-->
@@ -108,23 +108,25 @@ Following is the list of the datasets we have for this project. The primary data
   <image src="/images/starter-blog/datasets.png"/>
   <br />
 </div> -->
-
-Below shows the five top rows of the training set, validation set and testing set. There are mainly four columns for all datasets, in which `id` is the identifier, `commen_text` is the text of comment, `lang` is the language of the comment, and `toxic` is whether or not the comment is toxic. In the training set, we can see 5 additional columns which represent the subtypes of toxic comment. Moreover, we do not have the `toxic` column in the testing set.
-
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/train_header.png" width="500px"/>
+  <image src="/images/starter-blog/train_header.png" width="800px"/>
   <br />
   <figcaption>Top 5 rows of the training set</figcaption>
 </div>
 
+<br/><br/> 
+
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/validation_header.png" width="500px"/>
+  <image src="/images/starter-blog/validation_header.png" width="800px"/>
   <br />
   <figcaption>Top 5 rows of the validation set</figcaption>
 </div>
 
+Below shows the five top rows of the training set, validation set and testing set. There are mainly four columns for all datasets, in which `id` is the identifier, `commen_text` is the text of comment, `lang` is the language of the comment, and `toxic` is whether or not the comment is toxic. In the training set, we can see 5 additional columns which represent the subtypes of toxic comment. Moreover, we do not have the `toxic` column in the testing set.
+
+
 <div class="img-div" markdown="0" style="text-align:center">
-  <image src="/images/starter-blog/test_header.png" width="500px"/>
+  <image src="/images/starter-blog/test_header.png" width="800px"/>
   <br />
   <figcaption>Top 5 rows the testing set</figcaption>
 </div>
